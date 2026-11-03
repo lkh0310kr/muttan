@@ -58,6 +58,7 @@ struct TunerView: View {
             .background(Color(uiColor: .systemBackground))
             .navigationTitle("튜닝")
             .toolbarTitleDisplayMode(.inline)
+            .onAppear { DebugLog.record("screen.tuner.appear") }
             .onDisappear { tuner.stop() }
         }
     }
@@ -93,6 +94,19 @@ private struct TuningMeter: View {
     private let nineTicks = 9
 }
 
+private final class AudioLogGate: @unchecked Sendable {
+    private let lock = NSLock()
+    private var lastLog = Date.distantPast
+
+    func shouldLog(interval: TimeInterval) -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        guard Date().timeIntervalSince(lastLog) >= interval else { return false }
+        lastLog = Date()
+        return true
+    }
+}
+
 @MainActor
 private final class GuitarTuner: ObservableObject {
     @Published private(set) var frequency: Double?
@@ -106,12 +120,16 @@ private final class GuitarTuner: ObservableObject {
     private let engine = AVAudioEngine()
     private var lastUpdate = Date.distantPast
     private let notes = ["도", "도♯", "레", "레♯", "미", "파", "파♯", "솔", "솔♯", "라", "라♯", "시"]
+    private let noPitchLogGate = AudioLogGate()
+    private var lastPitchLog = Date.distantPast
 
     func start() {
         guard !isListening else { return }
+        DebugLog.record("tuner.start.requested")
         AVAudioApplication.requestRecordPermission { [weak self] granted in
             Task { @MainActor in
                 guard let self else { return }
+                DebugLog.record("tuner.microphone.permission", details: ["granted": String(granted)])
                 guard granted else {
                     self.statusMessage = "마이크 권한이 필요합니다. 설정에서 muttan의 마이크 접근을 허용해주세요."
                     return
@@ -123,6 +141,7 @@ private final class GuitarTuner: ObservableObject {
 
     func stop() {
         guard isListening || engine.isRunning else { return }
+        DebugLog.record("tuner.stop", details: ["engineRunning": String(engine.isRunning)])
         engine.inputNode.removeTap(onBus: 0)
         engine.stop()
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
@@ -142,23 +161,37 @@ private final class GuitarTuner: ObservableObject {
             let input = engine.inputNode
             let format = input.outputFormat(forBus: 0)
             guard format.channelCount > 0 else {
+                DebugLog.record("tuner.audio.no_input", details: ["sampleRate": String(format.sampleRate)])
                 statusMessage = "마이크 입력을 사용할 수 없습니다."
                 return
             }
+            DebugLog.record("tuner.audio.format", details: [
+                "sampleRate": String(format.sampleRate),
+                "channels": String(format.channelCount),
+                "bufferFrames": "4096"
+            ])
+            let noPitchLogGate = self.noPitchLogGate
             input.installTap(onBus: 0, bufferSize: 4096, format: format) { [weak self] buffer, _ in
                 guard let channel = buffer.floatChannelData?.pointee else { return }
                 let count = Int(buffer.frameLength)
                 let samples = (0..<count).filter { $0.isMultiple(of: 2) }.map { channel[$0] }
-                guard let pitch = Self.detectPitch(samples: samples, sampleRate: format.sampleRate / 2) else { return }
+                guard let pitch = Self.detectPitch(samples: samples, sampleRate: format.sampleRate / 2) else {
+                    if noPitchLogGate.shouldLog(interval: 5) {
+                        DebugLog.record("tuner.audio.no_pitch", details: ["frames": String(count)])
+                    }
+                    return
+                }
                 Task { @MainActor in self?.update(with: pitch) }
             }
             engine.prepare()
             try engine.start()
             isListening = true
             statusMessage = "줄을 하나씩 튕겨보세요."
+            DebugLog.record("tuner.audio.started")
         } catch {
             statusMessage = "마이크를 시작하지 못했어요: \(error.localizedDescription)"
             isListening = false
+            DebugLog.record("tuner.audio.start_failed", details: ["error": error.localizedDescription], level: .error)
         }
     }
 
@@ -172,6 +205,14 @@ private final class GuitarTuner: ObservableObject {
         noteName = notes[index]
         cents = (midi - Double(rounded)) * 100
         statusMessage = "가장 가까운 음: \(notes[index]) · 표준 튜닝 기준"
+        if Date().timeIntervalSince(lastPitchLog) >= 1 {
+            lastPitchLog = Date()
+            DebugLog.record("tuner.pitch", details: [
+                "frequencyHz": String(format: "%.2f", frequency),
+                "note": notes[index],
+                "cents": String(format: "%.1f", self.cents ?? 0)
+            ])
+        }
     }
 
     nonisolated private static func detectPitch(samples: [Float], sampleRate: Double) -> Double? {
