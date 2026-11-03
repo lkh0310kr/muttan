@@ -14,6 +14,7 @@
 		A10000000000000000000005 /* ProgressViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000005 /* ProgressViewScreen.swift */; };
 		A10000000000000000000006 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000006 /* SettingsView.swift */; };
 		A10000000000000000000007 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000009 /* DebugLog.swift */; };
+		A10000000000000000000008 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000010 /* PitchDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B10000000000000000000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B10000000000000000000008 /* muttan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muttan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10000000000000000000009 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		B10000000000000000000010 /* PitchDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				B10000000000000000000004 /* TunerView.swift */,
+				B10000000000000000000010 /* PitchDetector.swift */,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				A10000000000000000000005 /* ProgressViewScreen.swift in Sources */,
 				A10000000000000000000006 /* SettingsView.swift in Sources */,
 				A10000000000000000000007 /* DebugLog.swift in Sources */,
+				A10000000000000000000008 /* PitchDetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

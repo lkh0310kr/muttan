@@ -6,7 +6,5 @@
 	<string>기타 소리를 듣고 음정과 연주 타이밍을 분석하는 데 마이크를 사용합니다.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
-	<key>UIUserInterfaceStyle</key>
-	<string>Dark</string>
 </dict>
 </plist>

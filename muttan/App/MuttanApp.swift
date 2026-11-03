@@ -15,7 +15,6 @@ struct MuttanApp: App {
     var body: some Scene {
         WindowGroup {
             AppTabView()
-                .preferredColorScheme(.dark)
                 .onChange(of: scenePhase) { _, phase in
                     DebugLog.record("app.scene", details: ["phase": String(describing: phase)])
                 }
