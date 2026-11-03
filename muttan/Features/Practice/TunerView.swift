@@ -122,15 +122,32 @@ private final class GuitarTuner: ObservableObject {
     private let notes = ["도", "도♯", "레", "레♯", "미", "파", "파♯", "솔", "솔♯", "라", "라♯", "시"]
     private let noPitchLogGate = AudioLogGate()
     private var lastPitchLog = Date.distantPast
+    private var isStarting = false
+    private var tapInstalled = false
+    private var startAttempt = 0
 
     func start() {
-        guard !isListening else { return }
+        guard !isListening, !isStarting else {
+            DebugLog.record("tuner.start.ignored", details: [
+                "isListening": String(isListening),
+                "isStarting": String(isStarting)
+            ])
+            return
+        }
+        isStarting = true
+        startAttempt += 1
+        let attempt = startAttempt
         DebugLog.record("tuner.start.requested")
         AVAudioApplication.requestRecordPermission { [weak self] granted in
             Task { @MainActor in
                 guard let self else { return }
+                guard self.startAttempt == attempt else {
+                    DebugLog.record("tuner.start.cancelled", details: ["reason": "stale_permission_callback"])
+                    return
+                }
                 DebugLog.record("tuner.microphone.permission", details: ["granted": String(granted)])
                 guard granted else {
+                    self.isStarting = false
                     self.statusMessage = "마이크 권한이 필요합니다. 설정에서 muttan의 마이크 접근을 허용해주세요."
                     return
                 }
@@ -140,10 +157,12 @@ private final class GuitarTuner: ObservableObject {
     }
 
     func stop() {
-        guard isListening || engine.isRunning else { return }
+        startAttempt += 1
+        isStarting = false
+        guard isListening || engine.isRunning || tapInstalled else { return }
         DebugLog.record("tuner.stop", details: ["engineRunning": String(engine.isRunning)])
-        engine.inputNode.removeTap(onBus: 0)
-        engine.stop()
+        removeInputTapIfNeeded()
+        if engine.isRunning { engine.stop() }
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         isListening = false
         frequency = nil
@@ -153,7 +172,12 @@ private final class GuitarTuner: ObservableObject {
     }
 
     private func startEngine() {
+        defer { isStarting = false }
         do {
+            // Recover any tap left behind by a previous partial start before installing another.
+            if engine.isRunning { engine.stop() }
+            removeInputTapIfNeeded()
+
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playAndRecord, mode: .measurement, options: [.defaultToSpeaker, .allowBluetooth])
             try session.setActive(true)
@@ -162,6 +186,7 @@ private final class GuitarTuner: ObservableObject {
             let format = input.outputFormat(forBus: 0)
             guard format.channelCount > 0 else {
                 DebugLog.record("tuner.audio.no_input", details: ["sampleRate": String(format.sampleRate)])
+                try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
                 statusMessage = "마이크 입력을 사용할 수 없습니다."
                 return
             }
@@ -183,16 +208,27 @@ private final class GuitarTuner: ObservableObject {
                 }
                 Task { @MainActor in self?.update(with: pitch) }
             }
+            tapInstalled = true
             engine.prepare()
             try engine.start()
             isListening = true
             statusMessage = "줄을 하나씩 튕겨보세요."
             DebugLog.record("tuner.audio.started")
         } catch {
+            removeInputTapIfNeeded()
+            if engine.isRunning { engine.stop() }
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
             statusMessage = "마이크를 시작하지 못했어요: \(error.localizedDescription)"
             isListening = false
             DebugLog.record("tuner.audio.start_failed", details: ["error": error.localizedDescription], level: .error)
         }
+    }
+
+    private func removeInputTapIfNeeded() {
+        guard tapInstalled else { return }
+        engine.inputNode.removeTap(onBus: 0)
+        tapInstalled = false
+        DebugLog.record("tuner.audio.tap_removed")
     }
 
     private func update(with frequency: Double) {
