@@ -9,3 +9,5 @@
 Run `./scripts/capture-ui-screenshots.sh` to build the app, launch each screen in light and dark appearance on a background iOS simulator, and save pairs such as `chords-light.png` and `chords-dark.png` to `artifacts/ui-screenshots/`. It automatically finds the Xcode project, uses the matching scheme, and reads the app bundle ID from the built product. Choose a simulator or customize screens and appearances with command-line options such as `--device-name 'iPhone 17'`, `--screens chords,tuner`, and `--appearances dark`. The tuner uses fixed preview data in this mode and never requests microphone access.
 
 Available screenshot screens: `chords` (catalog), `chord-detail` (F barre voicing), `tuner`, `settings`. Run `python3 scripts/validate-chords.py` to validate all chord voicings.
+
+Run `./scripts/check-models.sh` for chord search/note and tuner session/expiry/target regression checks, plus synthetic pitch checks at 44.1, 48 and 96 kHz. Real microphone routing and interruptions still require an iPhone check.

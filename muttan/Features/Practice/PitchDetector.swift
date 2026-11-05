@@ -7,14 +7,17 @@ struct PitchEstimate {
 
 enum PitchDetector {
     /// YIN's cumulative mean normalized difference function for monophonic notes.
-    /// The clarity threshold rejects noisy or chord-like buffers instead of guessing.
+    /// Low-periodicity buffers are rejected. This is not a polyphonic chord detector.
     static func estimate(
         samples: [Float],
         sampleRate: Double,
         minimumFrequency: Double = 60,
         maximumFrequency: Double = 1_000
     ) -> PitchEstimate? {
-        guard samples.count >= 2_048, sampleRate > 0 else { return nil }
+        guard samples.count >= 2_048, sampleRate.isFinite, sampleRate > 0,
+              minimumFrequency.isFinite, maximumFrequency.isFinite,
+              minimumFrequency > 0, minimumFrequency < maximumFrequency,
+              maximumFrequency < sampleRate / 2 else { return nil }
 
         let mean = samples.reduce(0.0) { $0 + Double($1) } / Double(samples.count)
         let centered = samples.map { Double($0) - mean }

@@ -1,67 +1,37 @@
 import AVFoundation
 import SwiftUI
 
-private enum GuitarString: String, CaseIterable, Identifiable {
-    case lowE, a, d, g, b, highE
-
-    var id: String { rawValue }
-    var number: Int { 6 - (GuitarString.allCases.firstIndex(of: self) ?? 0) }
-    var standardMIDINote: Int {
-        switch self {
-        case .lowE: 40
-        case .a: 45
-        case .d: 50
-        case .g: 55
-        case .b: 59
-        case .highE: 64
-        }
-    }
-}
-
-private enum GuitarTuning: String, CaseIterable, Identifiable {
-    case standard, dropD, halfStepDown
-
-    var id: String { rawValue }
-    var title: String {
-        switch self {
-        case .standard: "Standard"
-        case .dropD: "Drop D"
-        case .halfStepDown: "Half step down"
-        }
-    }
-
-    func midi(for string: GuitarString) -> Int {
-        let base = string.standardMIDINote
-        switch (self, string) {
-        case (.dropD, .lowE): return base - 2
-        case (.halfStepDown, _): return base - 1
-        default: return base
-        }
-    }
-}
-
 struct TunerView: View {
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
     var screenshotMode = false
     @StateObject private var tuner = GuitarTuner()
     @AppStorage("muttan.tuner.tuning") private var tuningRawValue = GuitarTuning.standard.rawValue
     @AppStorage("muttan.tuner.string") private var stringRawValue = "auto"
 
-    private var tuning: GuitarTuning { GuitarTuning(rawValue: tuningRawValue) ?? .standard }
-    private var selectedString: GuitarString? { GuitarString(rawValue: stringRawValue) }
-    private var targetMIDINote: Int? { selectedString.map { tuning.midi(for: $0) } }
+    private var tuning: GuitarTuning { screenshotMode ? .standard : (GuitarTuning(rawValue: tuningRawValue) ?? .standard) }
+    private var selectedString: GuitarString? { screenshotMode ? nil : GuitarString(rawValue: stringRawValue) }
+    private var activeString: GuitarString? {
+        selectedString ?? displayedMIDINote.flatMap { tuning.nearestString(to: $0) }
+    }
+    private var targetMIDINote: Int? { activeString.map { tuning.midi(for: $0) } }
+    private var targetDescription: String {
+        guard let string = activeString, let midi = targetMIDINote else { return "PLAY AN OPEN STRING" }
+        let target = TunerPitchReading(midi: Double(midi))
+        return String(format: "STRING %d · %@ · %.1f Hz", string.number, target.noteName, target.frequency)
+    }
     private var displayedMIDINote: Double? { screenshotMode ? 40 : tuner.midi }
     private var displayedNoteName: String? { screenshotMode ? "E2" : tuner.noteName }
     private var displayedFrequency: Double? { screenshotMode ? 82.4 : tuner.frequency }
     private var deviation: Double? {
-        guard let midi = displayedMIDINote else { return nil }
-        return (midi - (targetMIDINote.map(Double.init) ?? midi.rounded())) * 100
+        guard let midi = displayedMIDINote, let target = targetMIDINote else { return nil }
+        return (midi - Double(target)) * 100
     }
     private var isInTune: Bool { deviation.map { abs($0) <= 4 } ?? false }
     private var autoBinding: Binding<Bool> {
         Binding(
             get: { selectedString == nil },
-            set: { stringRawValue = $0 ? "auto" : (selectedString?.rawValue ?? GuitarString.lowE.rawValue) }
+            set: { stringRawValue = $0 ? "auto" : (selectedString?.rawValue ?? activeString?.rawValue ?? GuitarString.lowE.rawValue) }
         )
     }
 
@@ -73,6 +43,7 @@ struct TunerView: View {
                         .padding(.top, 8)
 
                     TuningPitchGraph(
+                        target: targetDescription,
                         noteName: displayedNoteName,
                         cents: deviation,
                         frequency: displayedFrequency,
@@ -83,7 +54,7 @@ struct TunerView: View {
 
                     HeadstockStringPicker(
                         tuning: tuning,
-                        selectedString: selectedString,
+                        selectedString: activeString,
                         onSelect: { stringRawValue = $0.rawValue }
                     )
                     .frame(height: min(max(geometry.size.height * 0.41, 250), 330))
@@ -102,7 +73,18 @@ struct TunerView: View {
             .toolbar(.hidden, for: .navigationBar)
             .onAppear { DebugLog.record("screen.tuner.appear") }
             .onDisappear { tuner.stop() }
-            .sensoryFeedback(.success, trigger: isInTune)
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .background { tuner.pause(reason: "Tuner paused. Tap Start to resume.") }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { _ in
+                tuner.pause(reason: "Audio interrupted. Tap Start to resume.")
+            }
+            .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.routeChangeNotification)) { notification in
+                if let reason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt, reason == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
+                    tuner.pause(reason: "Audio input disconnected. Tap Start to resume.")
+                }
+            }
+            .sensoryFeedback(.success, trigger: isInTune) { _, newValue in newValue }
         }
     }
 
@@ -157,9 +139,9 @@ struct TunerView: View {
         if screenshotMode { return "In tune" }
         if let statusMessage = tuner.statusMessage { return statusMessage }
         guard tuner.isListening else { return "Pluck a string to tune" }
-        guard let deviation else { return "Listening for a clear note…" }
+        guard let deviation else { return displayedMIDINote == nil ? "Listening for a clear note…" : "Play an open guitar string" }
         if abs(deviation) <= 4 { return "In tune" }
-        return deviation < 0 ? "Tune up slightly" : "Tune down slightly"
+        return deviation < 0 ? (abs(deviation) > 50 ? "Tune up" : "Tune up slightly") : (abs(deviation) > 50 ? "Tune down" : "Tune down slightly")
     }
 
     private var tunerButton: some View {
@@ -184,6 +166,7 @@ struct TunerView: View {
 
 private struct TuningPitchGraph: View {
     @Environment(\.colorScheme) private var colorScheme
+    let target: String
     let noteName: String?
     let cents: Double?
     let frequency: Double?
@@ -215,6 +198,11 @@ private struct TuningPitchGraph: View {
                     context.stroke(reference, with: .color(.mint.opacity(0.9)), lineWidth: 1.5)
                 }
 
+                Text(target)
+                    .font(.caption2.weight(.semibold)).foregroundStyle(.secondary)
+                    .lineLimit(1).minimumScaleFactor(0.7)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .padding(.top, 8)
                 HStack {
                     Text("♭")
                     Spacer()
@@ -244,11 +232,16 @@ private struct TuningPitchGraph: View {
                         .background(colorScheme == .dark ? Color(red: 0.105, green: 0.115, blue: 0.135) : Color(uiColor: .secondarySystemBackground), in: Capsule())
                         .overlay(Capsule().stroke(Color.primary.opacity(0.12), lineWidth: 1))
                 }
-                .position(x: center + normalized * (center - 42), y: geometry.size.height * 0.48)
+                .position(x: center + normalized * (center - 42), y: geometry.size.height * 0.40)
                 .animation(.snappy(duration: 0.16), value: cents)
                 .animation(.spring(response: 0.25, dampingFraction: 0.7), value: isInTune)
 
                 VStack(spacing: 4) {
+                    if let cents {
+                        Text(String(format: "%+.0f cents", abs(cents) < 0.5 ? 0 : cents))
+                            .font(.system(.title3, design: .rounded, weight: .semibold))
+                            .monospacedDigit().foregroundStyle(isInTune ? Color.mint : Color.primary)
+                    }
                     Text(feedback.uppercased())
                         .font(.caption.weight(.semibold))
                         .tracking(0.9)
@@ -441,7 +434,8 @@ private final class GuitarTuner: ObservableObject {
     private let engine = AVAudioEngine()
     private let analysisQueue = DispatchQueue(label: "com.muttan.pitch-analysis", qos: .userInitiated)
     private let noPitchLogGate = AudioLogGate()
-    private var smoothedMIDINote: Double?
+    private var signal = TunerSignalState()
+    private var expiryTask: Task<Void, Never>?
     private var lastPitchLog = Date.distantPast
     private var tapInstalled = false
     private var startAttempt = 0
@@ -474,20 +468,27 @@ private final class GuitarTuner: ObservableObject {
         }
     }
 
+    func pause(reason: String) {
+        guard isListening || isStarting else { return }
+        stop()
+        statusMessage = reason
+        DebugLog.record("tuner.paused", details: ["reason": reason])
+    }
+
     func stop() {
         startAttempt += 1
         isStarting = false
+        signal.stop()
+        expiryTask?.cancel()
+        expiryTask = nil
+        publishReading()
+        statusMessage = nil
         guard isListening || engine.isRunning || tapInstalled else { return }
         DebugLog.record("tuner.stop", details: ["engineRunning": String(engine.isRunning)])
         removeInputTapIfNeeded()
         if engine.isRunning { engine.stop() }
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         isListening = false
-        frequency = nil
-        midi = nil
-        noteName = nil
-        smoothedMIDINote = nil
-        statusMessage = nil
     }
 
     private func startEngine() {
@@ -502,7 +503,7 @@ private final class GuitarTuner: ObservableObject {
 
             let input = engine.inputNode
             let format = input.outputFormat(forBus: 0)
-            guard format.channelCount > 0 else {
+            guard format.channelCount > 0, format.sampleRate > 0 else {
                 DebugLog.record("tuner.audio.no_input", details: ["sampleRate": String(format.sampleRate)])
                 try? session.setActive(false, options: .notifyOthersOnDeactivation)
                 statusMessage = "Microphone input is unavailable."
@@ -516,31 +517,43 @@ private final class GuitarTuner: ObservableObject {
 
             let noPitchLogGate = self.noPitchLogGate
             let analysisQueue = self.analysisQueue
+            let sampleRate = format.sampleRate
+            let token = signal.start()
+            // Each session has its own permit. Never wait or queue extra work on the audio callback.
+            let permit = DispatchSemaphore(value: 1)
             input.installTap(onBus: 0, bufferSize: 4096, format: format) { [weak self] buffer, _ in
-                guard let channel = buffer.floatChannelData?.pointee else { return }
+                guard let channel = buffer.floatChannelData?.pointee, permit.wait(timeout: .now()) == .success else { return }
+                let capturedAt = ProcessInfo.processInfo.systemUptime
                 let count = Int(buffer.frameLength)
                 let samples = Array(UnsafeBufferPointer(start: channel, count: count))
                 analysisQueue.async {
-                    guard let estimate = PitchDetector.estimate(samples: samples, sampleRate: format.sampleRate) else {
-                        if noPitchLogGate.shouldLog(interval: 5) {
-                            DebugLog.record("tuner.audio.no_pitch", details: ["frames": String(count)])
-                        }
-                        return
+                    let estimate = PitchDetector.estimate(samples: samples, sampleRate: sampleRate)
+                    if estimate == nil, noPitchLogGate.shouldLog(interval: 5) {
+                        DebugLog.record("tuner.audio.no_pitch", details: ["frames": String(count)])
                     }
-                    Task { @MainActor in self?.update(with: estimate) }
+                    Task { @MainActor in
+                        defer { permit.signal() }
+                        self?.update(with: estimate, capturedAt: capturedAt, session: token)
+                    }
                 }
             }
             tapInstalled = true
             engine.prepare()
             try engine.start()
             isListening = true
+            expiryTask = Task { [weak self] in
+                while !Task.isCancelled {
+                    do { try await Task.sleep(for: .milliseconds(200)) }
+                    catch { return }
+                    guard let self, !Task.isCancelled else { return }
+                    self.signal.expire(at: ProcessInfo.processInfo.systemUptime)
+                    self.publishReading()
+                }
+            }
             DebugLog.record("tuner.audio.started")
         } catch {
-            removeInputTapIfNeeded()
-            if engine.isRunning { engine.stop() }
-            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+            stop()
             statusMessage = error.localizedDescription
-            isListening = false
             DebugLog.record("tuner.audio.start_failed", details: ["error": error.localizedDescription], level: .error)
         }
     }
@@ -552,23 +565,17 @@ private final class GuitarTuner: ObservableObject {
         DebugLog.record("tuner.audio.tap_removed")
     }
 
-    private func update(with estimate: PitchEstimate) {
-        let rawMIDINote = 69 + 12 * log2(estimate.frequency / 440)
-        if let previous = smoothedMIDINote, abs(rawMIDINote - previous) < 2 {
-            smoothedMIDINote = previous * 0.65 + rawMIDINote * 0.35
-        } else {
-            smoothedMIDINote = rawMIDINote
-        }
-        guard let smoothedMIDINote else { return }
+    private func publishReading() {
+        midi = signal.reading?.midi
+        frequency = signal.reading?.frequency
+        noteName = signal.reading?.noteName
+    }
 
-        midi = smoothedMIDINote
-        frequency = 440 * pow(2, (smoothedMIDINote - 69) / 12)
-        let rounded = Int(smoothedMIDINote.rounded())
-        let names = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-        let index = (rounded % 12 + 12) % 12
-        noteName = "\(names[index])\(rounded / 12 - 1)"
-
-        if Date().timeIntervalSince(lastPitchLog) >= 1 {
+    private func update(with estimate: PitchEstimate?, capturedAt: TimeInterval, session token: Int) {
+        guard isListening, token == signal.session else { return }
+        signal.consume(estimate, capturedAt: capturedAt, now: ProcessInfo.processInfo.systemUptime, session: token)
+        publishReading()
+        if let estimate, noteName != nil, Date().timeIntervalSince(lastPitchLog) >= 1 {
             lastPitchLog = Date()
             DebugLog.record("tuner.pitch", details: [
                 "frequencyHz": String(format: "%.2f", estimate.frequency),

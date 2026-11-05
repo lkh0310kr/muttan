@@ -16,6 +16,7 @@
 		A10000000000000000000008 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000010 /* PitchDetector.swift */; };
 		A10000000000000000000011 = {isa = PBXBuildFile; fileRef = B10000000000000000000011; };
 		A10000000000000000000012 = {isa = PBXBuildFile; fileRef = B10000000000000000000012; };
+		A10000000000000000000013 = {isa = PBXBuildFile; fileRef = B10000000000000000000013; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B10000000000000000000010 /* PitchDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
 		B10000000000000000000011 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		B10000000000000000000012 = {isa = PBXFileReference; lastKnownFileType = text.json; path = chords.json; sourceTree = "<group>"; };
+		B10000000000000000000013 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerSignal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				B10000000000000000000004 /* TunerView.swift */,
 				B10000000000000000000010 /* PitchDetector.swift */,
+				B10000000000000000000013,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				A10000000000000000000006 /* SettingsView.swift in Sources */,
 				A10000000000000000000007 /* DebugLog.swift in Sources */,
 				A10000000000000000000008 /* PitchDetector.swift in Sources */,
+				A10000000000000000000013,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
