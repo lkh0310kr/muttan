@@ -40,7 +40,7 @@ struct ChordLibraryView: View {
                 }
                 .pickerStyle(.segmented)
                 HStack {
-                    Text("STANDARD · E A D G B E")
+                    Text("표준 튜닝 · E A D G B E")
                     Spacer()
                     Text("\(filtered.count)개")
                 }

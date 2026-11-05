@@ -4,7 +4,7 @@ enum ChordQuality: String, Codable, CaseIterable, Identifiable {
     case major, minor, dominant7
     var id: String { rawValue }
     var title: String {
-        switch self { case .major: "Major"; case .minor: "Minor"; case .dominant7: "7" }
+        switch self { case .major: "메이저"; case .minor: "마이너"; case .dominant7: "세븐" }
     }
     var intervals: Set<Int> {
         switch self { case .major: [0, 4, 7]; case .minor: [0, 3, 7]; case .dominant7: [0, 4, 7, 10] }

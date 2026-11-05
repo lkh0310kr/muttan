@@ -16,9 +16,9 @@ struct TunerView: View {
     }
     private var targetMIDINote: Int? { activeString.map { tuning.midi(for: $0) } }
     private var targetDescription: String {
-        guard let string = activeString, let midi = targetMIDINote else { return "PLAY AN OPEN STRING" }
+        guard let string = activeString, let midi = targetMIDINote else { return "개방현을 연주하세요" }
         let target = TunerPitchReading(midi: Double(midi))
-        return String(format: "STRING %d · %@ · %.1f Hz", string.number, target.noteName, target.frequency)
+        return String(format: "%d번 현 · %@ · %.1f Hz", string.number, target.noteName, target.frequency)
     }
     private var displayedMIDINote: Double? { screenshotMode ? 40 : tuner.midi }
     private var displayedNoteName: String? { screenshotMode ? "E2" : tuner.noteName }
@@ -38,6 +38,8 @@ struct TunerView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
+                let pitchHeight = min(230, max(120, min(geometry.size.height * 0.30, geometry.size.height - 326)))
+                let instrumentHeight = min(330, max(0, geometry.size.height - pitchHeight - 136))
                 VStack(spacing: 0) {
                     tuningHeader
                         .padding(.top, 8)
@@ -50,14 +52,14 @@ struct TunerView: View {
                         feedback: feedbackText,
                         isInTune: isInTune
                     )
-                    .frame(height: min(max(geometry.size.height * 0.31, 190), 250))
+                    .frame(height: pitchHeight)
 
                     HeadstockStringPicker(
                         tuning: tuning,
                         selectedString: activeString,
                         onSelect: { stringRawValue = $0.rawValue }
                     )
-                    .frame(height: min(max(geometry.size.height * 0.41, 250), 330))
+                    .frame(height: instrumentHeight)
                     .layoutPriority(1)
 
                     Spacer(minLength: 8)
@@ -74,14 +76,14 @@ struct TunerView: View {
             .onAppear { DebugLog.record("screen.tuner.appear") }
             .onDisappear { tuner.stop() }
             .onChange(of: scenePhase) { _, phase in
-                if phase == .background { tuner.pause(reason: "Tuner paused. Tap Start to resume.") }
+                if phase == .background { tuner.pause(reason: "튜너가 일시 정지됐어요. 다시 시작해 주세요.") }
             }
             .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { _ in
-                tuner.pause(reason: "Audio interrupted. Tap Start to resume.")
+                tuner.pause(reason: "오디오가 중단됐어요. 다시 시작해 주세요.")
             }
             .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.routeChangeNotification)) { notification in
                 if let reason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt, reason == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
-                    tuner.pause(reason: "Audio input disconnected. Tap Start to resume.")
+                    tuner.pause(reason: "입력 장치 연결이 끊겼어요. 다시 시작해 주세요.")
                 }
             }
             .sensoryFeedback(.success, trigger: isInTune) { _, newValue in newValue }
@@ -105,7 +107,7 @@ struct TunerView: View {
             } label: {
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(spacing: 6) {
-                        Text("Guitar 6-string")
+                        Text("6현 기타")
                             .font(.headline)
                         Image(systemName: "chevron.right")
                             .font(.caption.weight(.bold))
@@ -117,31 +119,30 @@ struct TunerView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Guitar 6-string, \(tuning.title). Choose tuning")
+            .accessibilityLabel("6현 기타, \(tuning.title). 튜닝 선택")
 
             Spacer(minLength: 8)
 
             Toggle(isOn: autoBinding) {
-                Text("AUTO")
+                Text("자동")
                     .font(.caption.weight(.semibold))
-                    .tracking(0.8)
             }
             .toggleStyle(.switch)
-            .tint(.mint)
+            .tint(.instrumentAccent)
             .fixedSize()
-            .accessibilityLabel("Automatic string detection")
+            .accessibilityLabel("자동 현 감지")
         }
         .foregroundStyle(colorScheme == .dark ? Color.white : Color.primary)
         .frame(height: 58)
     }
 
     private var feedbackText: String {
-        if screenshotMode { return "In tune" }
+        if screenshotMode { return "음정이 맞아요" }
         if let statusMessage = tuner.statusMessage { return statusMessage }
-        guard tuner.isListening else { return "Pluck a string to tune" }
-        guard let deviation else { return displayedMIDINote == nil ? "Listening for a clear note…" : "Play an open guitar string" }
-        if abs(deviation) <= 4 { return "In tune" }
-        return deviation < 0 ? (abs(deviation) > 50 ? "Tune up" : "Tune up slightly") : (abs(deviation) > 50 ? "Tune down" : "Tune down slightly")
+        guard tuner.isListening else { return "튜너를 켜고 줄을 튕겨 주세요" }
+        guard let deviation else { return displayedMIDINote == nil ? "기타 소리를 듣고 있어요" : "개방현을 연주하세요" }
+        if abs(deviation) <= 4 { return "음정이 맞아요" }
+        return deviation < 0 ? (abs(deviation) > 50 ? "음정을 높이세요" : "음정을 조금 높이세요") : (abs(deviation) > 50 ? "음정을 낮추세요" : "음정을 조금 낮추세요")
     }
 
     private var tunerButton: some View {
@@ -149,14 +150,14 @@ struct TunerView: View {
             tuner.isListening ? tuner.stop() : tuner.start()
         } label: {
             Label(
-                screenshotMode ? "Preview mode" : (tuner.isListening ? "Stop tuner" : (tuner.isStarting ? "Starting…" : "Start tuner")),
+                screenshotMode ? "미리보기" : (tuner.isListening ? "튜너 중지" : (tuner.isStarting ? "시작하는 중…" : "튜너 시작")),
                 systemImage: screenshotMode ? "waveform" : (tuner.isListening ? "stop.fill" : "mic.fill")
             )
             .font(.headline)
             .frame(maxWidth: .infinity)
             .frame(height: 54)
-            .background(Color.mint, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .foregroundStyle(Color.black.opacity(0.88))
+            .background(Color.instrumentAccent, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
         }
         .buttonStyle(.plain)
         .disabled(tuner.isStarting)
@@ -177,25 +178,24 @@ private struct TuningPitchGraph: View {
         GeometryReader { geometry in
             let center = geometry.size.width / 2
             let normalized = CGFloat(max(-50, min(50, cents ?? 0)) / 50)
+            let axisFraction: CGFloat = geometry.size.height < 180 ? 0.35 : 0.40
             ZStack {
                 Canvas { context, size in
-                    var grid = Path()
-                    for index in 0...24 {
-                        let x = size.width * CGFloat(index) / 24
-                        grid.move(to: CGPoint(x: x, y: 0))
-                        grid.addLine(to: CGPoint(x: x, y: size.height))
+                    let axisY = size.height * axisFraction
+                    var ticks = Path()
+                    ticks.move(to: CGPoint(x: 42, y: axisY))
+                    ticks.addLine(to: CGPoint(x: size.width - 42, y: axisY))
+                    for index in 0...20 {
+                        let x = 42 + (size.width - 84) * CGFloat(index) / 20
+                        let length: CGFloat = index.isMultiple(of: 5) ? 10 : 5
+                        ticks.move(to: CGPoint(x: x, y: axisY - length))
+                        ticks.addLine(to: CGPoint(x: x, y: axisY + length))
                     }
-                    for index in 0...10 {
-                        let y = size.height * CGFloat(index) / 10
-                        grid.move(to: CGPoint(x: 0, y: y))
-                        grid.addLine(to: CGPoint(x: size.width, y: y))
-                    }
-                    context.stroke(grid, with: .color(Color.primary.opacity(colorScheme == .dark ? 0.045 : 0.07)), lineWidth: 1)
-
+                    context.stroke(ticks, with: .color(Color.primary.opacity(0.18)), lineWidth: 1)
                     var reference = Path()
-                    reference.move(to: CGPoint(x: center, y: 0))
-                    reference.addLine(to: CGPoint(x: center, y: size.height))
-                    context.stroke(reference, with: .color(.mint.opacity(0.9)), lineWidth: 1.5)
+                    reference.move(to: CGPoint(x: center, y: 30))
+                    reference.addLine(to: CGPoint(x: center, y: size.height * 0.65))
+                    context.stroke(reference, with: .color(.instrumentAccent.opacity(0.8)), lineWidth: 1.5)
                 }
 
                 Text(target)
@@ -211,41 +211,40 @@ private struct TuningPitchGraph: View {
                 .font(.title2.weight(.medium))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 10)
-                .position(x: center, y: geometry.size.height * 0.48)
+                .position(x: center, y: geometry.size.height * axisFraction)
 
                 VStack(spacing: 5) {
-                    if isInTune {
+                    if isInTune && geometry.size.height >= 180 {
                         Image(systemName: "checkmark")
                             .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(.mint)
+                            .foregroundStyle(Color.instrumentAccent)
                             .frame(width: 38, height: 38)
                             .background(colorScheme == .dark ? Color(red: 0.075, green: 0.08, blue: 0.095) : Color(uiColor: .systemBackground), in: Circle())
-                            .overlay(Circle().stroke(.mint, lineWidth: 2))
+                            .overlay(Circle().stroke(Color.instrumentAccent, lineWidth: 2))
                             .transition(.scale.combined(with: .opacity))
                     }
 
                     Text(noteName ?? "—")
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .monospacedDigit()
-                        .foregroundStyle(noteName == nil ? Color.secondary : (colorScheme == .dark ? Color.mint : Color.primary))
+                        .foregroundStyle(noteName == nil ? Color.secondary : (colorScheme == .dark ? Color.instrumentAccent : Color.primary))
                         .frame(minWidth: 54, minHeight: 42)
                         .background(colorScheme == .dark ? Color(red: 0.105, green: 0.115, blue: 0.135) : Color(uiColor: .secondarySystemBackground), in: Capsule())
                         .overlay(Capsule().stroke(Color.primary.opacity(0.12), lineWidth: 1))
                 }
-                .position(x: center + normalized * (center - 42), y: geometry.size.height * 0.40)
+                .position(x: center + normalized * (center - 42), y: geometry.size.height * axisFraction)
                 .animation(.snappy(duration: 0.16), value: cents)
                 .animation(.spring(response: 0.25, dampingFraction: 0.7), value: isInTune)
 
                 VStack(spacing: 4) {
                     if let cents {
-                        Text(String(format: "%+.0f cents", abs(cents) < 0.5 ? 0 : cents))
+                        Text(String(format: "%+.0f 센트", abs(cents) < 0.5 ? 0 : cents))
                             .font(.system(.title3, design: .rounded, weight: .semibold))
-                            .monospacedDigit().foregroundStyle(isInTune ? Color.mint : Color.primary)
+                            .monospacedDigit().foregroundStyle(isInTune ? Color.instrumentAccent : Color.primary)
                     }
-                    Text(feedback.uppercased())
+                    Text(feedback)
                         .font(.caption.weight(.semibold))
-                        .tracking(0.9)
-                        .foregroundStyle(isInTune ? Color.mint : (colorScheme == .dark ? Color.white.opacity(0.8) : Color.primary.opacity(0.8)))
+                        .foregroundStyle(isInTune ? Color.instrumentAccent : (colorScheme == .dark ? Color.white.opacity(0.8) : Color.primary.opacity(0.8)))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                     Text(frequency.map { String(format: "%.1f Hz", $0) } ?? " ")
@@ -263,147 +262,136 @@ private struct TuningPitchGraph: View {
     }
 
     private var graphAccessibilityLabel: String {
-        guard let cents else { return "Tuner. \(feedback)" }
-        return String(format: "%@, %.0f cents %@. %@", noteName ?? "No note", abs(cents), cents < 0 ? "flat" : "sharp", feedback)
+        guard let cents else { return "튜너. \(feedback)" }
+        return String(format: "%@, %.0f 센트 %@. %@", noteName ?? "감지된 음 없음", abs(cents), cents < 0 ? "낮음" : "높음", feedback)
     }
 }
 
 private struct HeadstockStringPicker: View {
-    @Environment(\.colorScheme) private var colorScheme
     let tuning: GuitarTuning
     let selectedString: GuitarString?
     let onSelect: (GuitarString) -> Void
 
-    private let leftStrings: [GuitarString] = [.d, .a, .lowE]
-    private let rightStrings: [GuitarString] = [.g, .b, .highE]
-
     var body: some View {
-        HStack(spacing: 2) {
-            stringColumn(leftStrings)
-            GuitarHeadstock()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .accessibilityHidden(true)
-            stringColumn(rightStrings)
-        }
-        .padding(.vertical, 4)
-    }
-
-    private func stringColumn(_ strings: [GuitarString]) -> some View {
-        VStack(spacing: 14) {
-            ForEach(strings) { string in
-                let midi = tuning.midi(for: string)
-                Button {
-                    onSelect(string)
-                } label: {
-                    VStack(spacing: 3) {
-                        Text(Self.noteName(for: midi))
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        Text("\(string.number)")
-                            .font(.caption2.monospacedDigit())
-                            .foregroundStyle(colorScheme == .dark ? Color.white.opacity(0.56) : Color.secondary)
+        GeometryReader { geometry in
+            let headHeight = min(geometry.size.height, max(0, geometry.size.width - 112) / 0.72)
+            let headWidth = headHeight * 0.72
+            let inset = (geometry.size.height - headHeight) / 2
+            let diameter: CGFloat = headHeight < 270 ? 44 : 52
+            ZStack {
+                GuitarHeadstock(selectedString: selectedString)
+                    .frame(width: headWidth, height: headHeight)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                    .accessibilityHidden(true)
+                ForEach(HeadstockStringRoute.all, id: \.string) { route in
+                    let target = TunerPitchReading(midi: Double(tuning.midi(for: route.string)))
+                    let selected = route.string == selectedString
+                    Button { onSelect(route.string) } label: {
+                        VStack(spacing: 2) {
+                            Text(target.noteName).font(.system(.body, design: .rounded, weight: .semibold))
+                            Text("\(route.string.number)번 현").font(.system(size: 10)).foregroundStyle(.secondary)
+                        }
+                        .foregroundStyle(selected ? Color.instrumentAccent : Color.primary)
+                        .frame(width: diameter, height: diameter)
+                        .background(selected ? Color.instrumentAccent.opacity(0.09) : Color(uiColor: .secondarySystemBackground), in: Circle())
+                        .overlay(Circle().stroke(selected ? Color.instrumentAccent : Color.primary.opacity(0.12), lineWidth: selected ? 2 : 1))
                     }
-                    .foregroundStyle(selectedString == string ? Color.mint : (colorScheme == .dark ? Color.white : Color.primary))
-                    .frame(width: 56, height: 56)
-                    .background {
-                        Circle().fill(selectedString == string ? Color.mint.opacity(0.12) : Color.primary.opacity(colorScheme == .dark ? 0.035 : 0.04))
-                    }
-                    .overlay {
-                        Circle().stroke(selectedString == string ? Color.mint : Color.primary.opacity(0.22), lineWidth: selectedString == string ? 2 : 1)
-                    }
+                    .buttonStyle(.plain)
+                    .position(x: route.post.x < 0.5 ? diameter / 2 : geometry.size.width - diameter / 2,
+                              y: inset + route.post.y * headHeight)
+                    .accessibilityLabel("\(route.string.number)번 현, \(target.noteName)")
+                    .accessibilityAddTraits(selected ? .isSelected : [])
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("String \(string.number), \(Self.noteName(for: midi))")
-                .accessibilityAddTraits(selectedString == string ? .isSelected : [])
             }
         }
-        .frame(width: 60)
-    }
-
-    private static func noteName(for midi: Int) -> String {
-        let names = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-        let index = (midi % 12 + 12) % 12
-        return "\(names[index])\(midi / 12 - 1)"
     }
 }
 
 private struct GuitarHeadstock: View {
-    private let pegPositions: [(CGFloat, CGFloat)] = [
-        (0.13, 0.30), (0.13, 0.48), (0.15, 0.66),
-        (0.87, 0.30), (0.87, 0.48), (0.85, 0.66)
-    ]
+    let selectedString: GuitarString?
 
     var body: some View {
         GeometryReader { geometry in
-            let size = geometry.size
+            let w = geometry.size.width
+            let h = geometry.size.height
             ZStack {
-                HeadstockShape()
-                    .fill(LinearGradient(
-                        colors: [Color(red: 0.34, green: 0.19, blue: 0.12), Color(red: 0.18, green: 0.105, blue: 0.08)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-                HeadstockShape()
-                    .stroke(Color(red: 0.78, green: 0.57, blue: 0.35).opacity(0.72), lineWidth: 2)
-
-                Canvas { context, canvasSize in
-                    var strings = Path()
-                    let anchorPositions: [CGFloat] = [0.39, 0.435, 0.48, 0.52, 0.565, 0.61]
-                    for index in 0..<6 {
-                        let peg = pegPositions[index]
-                        strings.move(to: CGPoint(x: canvasSize.width * anchorPositions[index], y: canvasSize.height * 0.94))
-                        strings.addLine(to: CGPoint(x: canvasSize.width * peg.0, y: canvasSize.height * peg.1))
-                    }
-                    context.stroke(strings, with: .color(.white.opacity(0.62)), lineWidth: 1.2)
+                // Shafts and keys sit behind the wood, one pair for each post.
+                ForEach(HeadstockStringRoute.all, id: \.string) { route in
+                    let left = route.post.x < 0.5
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(LinearGradient(colors: [Color(white: 0.45), .white, Color(white: 0.48)], startPoint: .top, endPoint: .bottom))
+                        .frame(width: w * 0.235, height: max(3, h * 0.012))
+                        .position(x: w * (left ? 0.1725 : 0.8275), y: h * route.post.y)
+                    RoundedRectangle(cornerRadius: w * 0.025)
+                        .fill(LinearGradient(colors: [Color(white: 0.93), Color(white: 0.65), Color(white: 0.88)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .overlay(RoundedRectangle(cornerRadius: w * 0.025).stroke(Color(white: 0.4), lineWidth: 0.7))
+                        .frame(width: w * 0.11, height: h * 0.085)
+                        .position(x: w * (left ? 0.06 : 0.94), y: h * route.post.y)
                 }
-
-                ForEach(pegPositions.indices, id: \.self) { index in
-                    let position = pegPositions[index]
+                HeadstockShape()
+                    .fill(LinearGradient(colors: [Color(red: 0.28, green: 0.18, blue: 0.12), Color(red: 0.19, green: 0.12, blue: 0.085)], startPoint: .leading, endPoint: .trailing))
+                    .overlay(HeadstockShape().stroke(Color(red: 0.65, green: 0.48, blue: 0.32), lineWidth: 1.2))
+                Rectangle()
+                    .fill(Color(red: 0.12, green: 0.105, blue: 0.09))
+                    .frame(width: w * 0.34, height: h * 0.16)
+                    .position(x: w / 2, y: h * 0.92)
+                Canvas { context, _ in
+                    for y: CGFloat in [0.915, 0.985] {
+                        var fret = Path()
+                        fret.move(to: CGPoint(x: w * 0.33, y: h * y))
+                        fret.addLine(to: CGPoint(x: w * 0.67, y: h * y))
+                        context.stroke(fret, with: .color(Color(white: 0.55)), lineWidth: 1.3)
+                    }
+                }
+                RoundedRectangle(cornerRadius: 1)
+                    .fill(Color(red: 0.91, green: 0.87, blue: 0.75))
+                    .frame(width: w * 0.36, height: max(4, h * 0.016))
+                    .position(x: w / 2, y: h * HeadstockStringRoute.nutY)
+                Canvas { context, _ in
+                    for route in HeadstockStringRoute.all {
+                        var string = Path()
+                        string.move(to: CGPoint(x: route.nut.x * w, y: h))
+                        string.addLine(to: CGPoint(x: route.nut.x * w, y: route.nut.y * h))
+                        string.addLine(to: CGPoint(x: route.post.x * w, y: route.post.y * h))
+                        let selected = route.string == selectedString
+                        context.stroke(string, with: .color(selected ? .mint : Color(red: 0.79, green: 0.77, blue: 0.66)), style: StrokeStyle(lineWidth: selected ? 2.4 : route.width, lineCap: .round, lineJoin: .round))
+                    }
+                }
+                ForEach(HeadstockStringRoute.all, id: \.string) { route in
                     ZStack {
-                        Circle().fill(LinearGradient(colors: [.white, Color(white: 0.52), .white.opacity(0.78)], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        Circle().stroke(Color.black.opacity(0.5), lineWidth: 1)
-                        Circle().fill(Color(white: 0.3)).frame(width: 5, height: 5)
+                        Circle().fill(Color(white: 0.7))
+                        Circle().stroke(Color(white: 0.35), lineWidth: 1)
+                        Circle().fill(Color(white: 0.94)).padding(w * 0.016)
+                        Circle().fill(Color(white: 0.38)).padding(w * 0.03)
                     }
-                    .frame(width: 19, height: 19)
-                    .position(x: size.width * position.0, y: size.height * position.1)
+                    .frame(width: w * 0.086, height: w * 0.086)
+                    .position(x: route.post.x * w, y: route.post.y * h)
                 }
-
-                RoundedRectangle(cornerRadius: 3)
-                    .fill(Color(red: 0.82, green: 0.73, blue: 0.56))
-                    .frame(width: size.width * 0.34, height: 5)
-                    .position(x: size.width / 2, y: size.height * 0.94)
-
                 Text("muttan")
-                    .font(.system(size: 10, weight: .medium, design: .serif))
-                    .tracking(1)
-                    .foregroundStyle(Color.white.opacity(0.35))
-                    .position(x: size.width / 2, y: size.height * 0.22)
+                    .font(.system(size: max(9, w * 0.048), weight: .medium, design: .serif))
+                    .foregroundStyle(Color(red: 0.85, green: 0.75, blue: 0.54))
+                    .position(x: w / 2, y: h * 0.115)
             }
         }
-        .frame(maxWidth: 210)
-        .aspectRatio(0.66, contentMode: .fit)
-        .shadow(color: .black.opacity(0.35), radius: 12, y: 6)
     }
 }
 
 private struct HeadstockShape: Shape {
     func path(in rect: CGRect) -> Path {
-        let w = rect.width
-        let h = rect.height
+        func point(_ x: CGFloat, _ y: CGFloat) -> CGPoint { CGPoint(x: x * rect.width, y: y * rect.height) }
         var path = Path()
-        path.move(to: CGPoint(x: w * 0.44, y: h * 0.02))
-        path.addCurve(to: CGPoint(x: w * 0.19, y: h * 0.13), control1: CGPoint(x: w * 0.30, y: h * -0.01), control2: CGPoint(x: w * 0.23, y: h * 0.02))
-        path.addCurve(to: CGPoint(x: w * 0.12, y: h * 0.26), control1: CGPoint(x: w * 0.02, y: h * 0.17), control2: CGPoint(x: w * 0.02, y: h * 0.22))
-        path.addCurve(to: CGPoint(x: w * 0.12, y: h * 0.42), control1: CGPoint(x: w * 0.02, y: h * 0.30), control2: CGPoint(x: w * 0.03, y: h * 0.36))
-        path.addCurve(to: CGPoint(x: w * 0.15, y: h * 0.58), control1: CGPoint(x: w * 0.02, y: h * 0.47), control2: CGPoint(x: w * 0.05, y: h * 0.53))
-        path.addLine(to: CGPoint(x: w * 0.28, y: h * 0.72))
-        path.addLine(to: CGPoint(x: w * 0.34, y: h * 0.97))
-        path.addCurve(to: CGPoint(x: w * 0.66, y: h * 0.97), control1: CGPoint(x: w * 0.43, y: h), control2: CGPoint(x: w * 0.57, y: h))
-        path.addLine(to: CGPoint(x: w * 0.72, y: h * 0.72))
-        path.addLine(to: CGPoint(x: w * 0.85, y: h * 0.58))
-        path.addCurve(to: CGPoint(x: w * 0.88, y: h * 0.42), control1: CGPoint(x: w * 0.95, y: h * 0.53), control2: CGPoint(x: w * 0.98, y: h * 0.47))
-        path.addCurve(to: CGPoint(x: w * 0.88, y: h * 0.26), control1: CGPoint(x: w * 0.97, y: h * 0.36), control2: CGPoint(x: w * 0.98, y: h * 0.30))
-        path.addCurve(to: CGPoint(x: w * 0.81, y: h * 0.13), control1: CGPoint(x: w * 0.98, y: h * 0.22), control2: CGPoint(x: w * 0.98, y: h * 0.17))
-        path.addCurve(to: CGPoint(x: w * 0.56, y: h * 0.02), control1: CGPoint(x: w * 0.77, y: h * 0.02), control2: CGPoint(x: w * 0.70, y: h * -0.01))
+        path.move(to: point(0.23, 0.04))
+        path.addQuadCurve(to: point(0.5, 0.025), control: point(0.34, 0.025))
+        path.addQuadCurve(to: point(0.77, 0.04), control: point(0.66, 0.025))
+        path.addQuadCurve(to: point(0.83, 0.105), control: point(0.83, 0.04))
+        path.addLine(to: point(0.78, 0.70))
+        path.addCurve(to: point(0.67, 0.84), control1: point(0.77, 0.77), control2: point(0.68, 0.78))
+        path.addLine(to: point(0.67, 1))
+        path.addLine(to: point(0.33, 1))
+        path.addLine(to: point(0.33, 0.84))
+        path.addCurve(to: point(0.22, 0.70), control1: point(0.32, 0.78), control2: point(0.23, 0.77))
+        path.addLine(to: point(0.17, 0.105))
+        path.addQuadCurve(to: point(0.23, 0.04), control: point(0.17, 0.04))
         path.closeSubpath()
         return path
     }
@@ -460,7 +448,7 @@ private final class GuitarTuner: ObservableObject {
                 DebugLog.record("tuner.microphone.permission", details: ["granted": String(granted)])
                 guard granted else {
                     self.isStarting = false
-                    self.statusMessage = "Microphone access is required. Enable it in Settings."
+                    self.statusMessage = "설정에서 마이크 접근을 허용해 주세요."
                     return
                 }
                 self.startEngine()
@@ -506,7 +494,7 @@ private final class GuitarTuner: ObservableObject {
             guard format.channelCount > 0, format.sampleRate > 0 else {
                 DebugLog.record("tuner.audio.no_input", details: ["sampleRate": String(format.sampleRate)])
                 try? session.setActive(false, options: .notifyOthersOnDeactivation)
-                statusMessage = "Microphone input is unavailable."
+                statusMessage = "마이크를 사용할 수 없어요."
                 return
             }
             DebugLog.record("tuner.audio.format", details: [
@@ -553,7 +541,7 @@ private final class GuitarTuner: ObservableObject {
             DebugLog.record("tuner.audio.started")
         } catch {
             stop()
-            statusMessage = error.localizedDescription
+            statusMessage = "마이크를 시작할 수 없어요. 다시 시도해 주세요."
             DebugLog.record("tuner.audio.start_failed", details: ["error": error.localizedDescription], level: .error)
         }
     }

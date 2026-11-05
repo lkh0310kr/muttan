@@ -23,9 +23,9 @@ enum GuitarTuning: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     var title: String {
         switch self {
-        case .standard: "Standard"
-        case .dropD: "Drop D"
-        case .halfStepDown: "Half step down"
+        case .standard: "표준"
+        case .dropD: "드롭 D"
+        case .halfStepDown: "반음 낮춤"
         }
     }
 
@@ -99,5 +99,25 @@ struct TunerSignalState {
             reading = nil
             self.lastValidTime = nil
         }
+    }
+}
+
+/// Front view: nut slots run 6→1 from left to right. Posts preserve that order.
+struct HeadstockStringRoute {
+    let string: GuitarString
+    let nut: CGPoint
+    let post: CGPoint
+    let width: CGFloat
+
+    static let nutY: CGFloat = 0.84
+    static let all: [HeadstockStringRoute] = GuitarString.allCases.enumerated().map { index, string in
+        let leftSide = index < 3
+        let row = leftSide ? 2 - index : index - 3
+        return HeadstockStringRoute(
+            string: string,
+            nut: CGPoint(x: 0.35 + CGFloat(index) * 0.06, y: nutY),
+            post: CGPoint(x: leftSide ? 0.29 : 0.71, y: 0.19 + CGFloat(row) * 0.26),
+            width: [1.6, 1.4, 1.2, 0.95, 0.8, 0.65][index]
+        )
     }
 }

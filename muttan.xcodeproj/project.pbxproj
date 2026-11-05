@@ -17,6 +17,7 @@
 		A10000000000000000000011 = {isa = PBXBuildFile; fileRef = B10000000000000000000011; };
 		A10000000000000000000012 = {isa = PBXBuildFile; fileRef = B10000000000000000000012; };
 		A10000000000000000000013 = {isa = PBXBuildFile; fileRef = B10000000000000000000013; };
+		A10000000000000000000014 = {isa = PBXBuildFile; fileRef = B10000000000000000000014; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B10000000000000000000011 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
 		B10000000000000000000012 = {isa = PBXFileReference; lastKnownFileType = text.json; path = chords.json; sourceTree = "<group>"; };
 		B10000000000000000000013 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerSignal.swift; sourceTree = "<group>"; };
+		B10000000000000000000014 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPalette.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				B10000000000000000000001 /* MuttanApp.swift */,
 				B10000000000000000000009 /* DebugLog.swift */,
+				B10000000000000000000014,
 				B10000000000000000000002 /* AppTabView.swift */,
 			);
 			path = App;
@@ -202,6 +205,7 @@
 				A10000000000000000000004 /* TunerView.swift in Sources */,
 				A10000000000000000000006 /* SettingsView.swift in Sources */,
 				A10000000000000000000007 /* DebugLog.swift in Sources */,
+				A10000000000000000000014,
 				A10000000000000000000008 /* PitchDetector.swift in Sources */,
 				A10000000000000000000013,
 			);

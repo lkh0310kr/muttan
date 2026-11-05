@@ -85,3 +85,26 @@ let noise = (0..<4096).map { _ -> Float in
 }
 check(PitchDetector.estimate(samples: noise, sampleRate: 48000) == nil, "Broadband noise")
 print("Pitch estimator checks passed: guitar notes, harmonics, three sample rates, silence, noise and invalid input.")
+
+let routes = HeadstockStringRoute.all
+check(Set(routes.map(\.string)).count == 6, "Six distinct string routes")
+for (index, route) in routes.enumerated() {
+    check(route.string == GuitarString.allCases[index], "Routes keep string IDs")
+    check(route.nut.y == HeadstockStringRoute.nutY && route.nut.y > route.post.y, "Nut below posts")
+    check((0...1).contains(route.nut.x) && (0...1).contains(route.post.x), "Normalized headstock points")
+    check(index < 3 ? route.post.x < 0.5 : route.post.x > 0.5, "Three posts per side")
+}
+func stringX(_ route: HeadstockStringRoute, at y: CGFloat) -> CGFloat {
+    let fraction = (y - route.post.y) / (route.nut.y - route.post.y)
+    return route.post.x + fraction * (route.nut.x - route.post.x)
+}
+for i in 0..<routes.count {
+    for j in (i + 1)..<routes.count {
+        let top = max(routes[i].post.y, routes[j].post.y)
+        for step in 0...100 {
+            let y = top + (HeadstockStringRoute.nutY - top) * CGFloat(step) / 100
+            check(stringX(routes[i], at: y) < stringX(routes[j], at: y), "Guitar strings must never cross")
+        }
+    }
+}
+print("Headstock routing checks passed: six posts, ordered nut slots and no crossed strings.")

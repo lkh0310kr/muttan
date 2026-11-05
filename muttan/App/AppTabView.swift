@@ -26,7 +26,7 @@ struct AppTabView: View {
                 .tabItem { Label("설정", systemImage: "gearshape") }
                 .tag("settings")
         }
-        .tint(.mint)
+        .tint(.instrumentAccent)
         .preferredColorScheme(snapshotAppearance)
     }
 }
