@@ -19,8 +19,19 @@ struct Chord: Codable, Identifiable {
     let voicings: [ChordVoicing]
 
     func matches(query: String, quality filter: ChordQuality?) -> Bool {
-        (filter == nil || quality == filter) && (query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || symbol.localizedCaseInsensitiveContains(query.trimmingCharacters(in: .whitespacesAndNewlines)))
+        guard filter == nil || quality == filter else { return false }
+        let normalized = query.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard !normalized.isEmpty else { return true }
+        let rootName = ChordVoicing.noteNames[root]
+        let names: [String]
+        switch quality {
+        case .major: names = [symbol, "\(rootName) major", "\(rootName) 메이저"]
+        case .minor: names = [symbol, "\(rootName) minor", "\(rootName) 마이너"]
+        case .dominant7: names = [symbol, "\(rootName) dominant 7", "\(rootName) seventh", "\(rootName) 세븐"]
+        }
+        return names.contains { $0.lowercased().contains(normalized) }
     }
+
 }
 
 struct ChordVoicing: Codable, Identifiable {
@@ -44,13 +55,22 @@ struct ChordVoicing: Codable, Identifiable {
     var pitches: Set<Int> {
         Set(zip(Self.tuning, frets).compactMap { note, fret in fret.map { (note + $0) % 12 } })
     }
-    var accessibilityDescription: String {
-        frets.indices.map { index in
-            guard let fret = frets[index] else { return "\(6 - index)번 현 뮤트" }
-            if fret == 0 { return "\(6 - index)번 현 개방현" }
-            return "\(6 - index)번 현 \(fret)프렛, \(fingers[index] ?? 0)번 손가락"
-        }.joined(separator: ". ")
+    func note(at index: Int, includeOctave: Bool = false) -> String? {
+        guard frets.indices.contains(index), let fret = frets[index] else { return nil }
+        let midi = Self.tuning[index] + fret
+        return Self.noteNames[midi % 12] + (includeOctave ? String(midi / 12 - 1) : "")
     }
+
+    var accessibilityDescription: String {
+        let strings = frets.indices.map { index in
+            guard let fret = frets[index] else { return "\(6 - index)번 현 뮤트" }
+            let position = fret == 0 ? "개방현" : "\(fret)프렛, \(fingers[index] ?? 0)번 손가락"
+            return "\(6 - index)번 현 \(position), \(note(at: index, includeOctave: true) ?? "")"
+        }
+        let bars = barres.map { "\($0.finger)번 손가락 바레, \($0.fret)프렛 \($0.fromString)번부터 \($0.toString)번 현" }
+        return (strings + bars).joined(separator: ". ")
+    }
+
 }
 
 enum ChordCatalog {

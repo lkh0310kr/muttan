@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ChordLibraryView: View {
     var snapshotDetail = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var query = ""
     @State private var quality: ChordQuality?
     @State private var path: [String] = []
@@ -49,7 +50,7 @@ struct ChordLibraryView: View {
                     ContentUnavailableView.search(text: query.trimmingCharacters(in: .whitespacesAndNewlines))
                         .frame(maxWidth: .infinity)
                 } else {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: dynamicTypeSize.isAccessibilitySize ? 1 : 2), spacing: 14) {
                         ForEach(filtered) { chord in
                             NavigationLink(value: chord.id) {
                                 VStack(alignment: .leading, spacing: 10) {
@@ -74,13 +75,17 @@ struct ChordLibraryView: View {
             .padding(20)
         }
         .background(Color(uiColor: .systemGroupedBackground))
-        .searchable(text: $query, prompt: "코드 검색 · C, Am, A7")
+        .searchable(text: $query, prompt: "코드 검색 · C, Am, A major")
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+        .scrollDismissesKeyboard(.interactively)
     }
 }
 
 private struct ChordDetailView: View {
     let chord: Chord
     @State private var voicingIndex = 0
+    @State private var showsNotes = false
     private var voicing: ChordVoicing { chord.voicings[voicingIndex] }
     private var notes: String {
         voicing.pitches.sorted { ($0 - chord.root + 12) % 12 < ($1 - chord.root + 12) % 12 }
@@ -100,19 +105,25 @@ private struct ChordDetailView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                ChordDiagram(voicing: voicing)
+                Picker("운지표 표시", selection: $showsNotes) {
+                    Text("손가락 번호").tag(false)
+                    Text("음이름").tag(true)
+                }
+                .pickerStyle(.segmented)
+                ChordDiagram(voicing: voicing, showsNotes: showsNotes)
                     .frame(maxWidth: 340)
                     .frame(height: 330)
                     .padding(.vertical, 14)
                     .frame(maxWidth: .infinity)
                     .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24))
-                HStack(spacing: 24) {
+                HStack(spacing: 16) {
                     Text("○ 개방현")
                     Text("× 뮤트")
                     Text("1–4 손가락")
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
+                stringDetails
                 VStack(alignment: .leading, spacing: 8) {
                     Text("표준 튜닝 · 오른손 기타").font(.subheadline.weight(.semibold))
                     Text("왼쪽부터 6번 현입니다. 숫자는 검지(1)부터 소지(4)까지의 손가락 번호이며, 연결된 표시는 바레입니다.")
@@ -128,11 +139,38 @@ private struct ChordDetailView: View {
         .navigationTitle(chord.symbol)
         .navigationBarTitleDisplayMode(.inline)
     }
+
+    private var stringDetails: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("현별 운지").font(.headline)
+            Grid(horizontalSpacing: 16, verticalSpacing: 12) {
+                GridRow {
+                    Text("현"); Text("프렛"); Text("손가락"); Text("음")
+                }
+                .font(.caption).foregroundStyle(.secondary)
+                ForEach(0..<6, id: \.self) { index in
+                    GridRow {
+                        Text("\(6 - index)")
+                        Text(voicing.frets[index].map { $0 == 0 ? "개방" : String($0) } ?? "뮤트")
+                        Text(voicing.fingers[index].flatMap { $0 == 0 ? nil : String($0) } ?? "—")
+                        Text(voicing.note(at: index, includeOctave: true) ?? "—")
+                    }
+                    .font(.subheadline.monospacedDigit())
+                    .accessibilityElement(children: .combine)
+                }
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding(20)
+        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 20))
+    }
+
 }
 
 private struct ChordDiagram: View {
     let voicing: ChordVoicing
     var compact = false
+    var showsNotes = false
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -180,7 +218,9 @@ private struct ChordDiagram: View {
                 ForEach(0..<6, id: \.self) { index in
                     let x = left + CGFloat(index) * dx
                     if let fret = voicing.frets[index], fret > 0 {
-                        Text("\(voicing.fingers[index] ?? 0)")
+                        let barre = voicing.barres.first { $0.fret == fret && $0.finger == voicing.fingers[index] && ( $0.toString...$0.fromString ).contains(6 - index) }
+                        let label = showsNotes ? (voicing.note(at: index) ?? "") : (barre == nil || barre?.fromString == 6 - index ? String(voicing.fingers[index] ?? 0) : "")
+                        Text(label)
                             .font(.system(size: compact ? 9 : 16, weight: .bold, design: .rounded))
                             .foregroundStyle(.black)
                             .frame(width: diameter, height: diameter)
@@ -193,7 +233,7 @@ private struct ChordDiagram: View {
                             .position(x: x, y: top * 0.43)
                     }
                     if !compact {
-                        Text("\(6 - index)")
+                        Text(showsNotes ? (voicing.note(at: index) ?? "×") : String(6 - index))
                             .font(.caption2).foregroundStyle(.secondary)
                             .position(x: x, y: top + dy * 5 + 16)
                     }
