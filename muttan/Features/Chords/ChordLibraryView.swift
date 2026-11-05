@@ -2,9 +2,12 @@ import SwiftUI
 
 struct ChordLibraryView: View {
     var snapshotDetail = false
+    var snapshotChart = false
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var query = ""
     @State private var quality: ChordQuality?
+    @State private var root: Int?
+    @State private var showsChart = false
     @State private var path: [String] = []
 
     var body: some View {
@@ -24,45 +27,57 @@ struct ChordLibraryView: View {
             }
             .onAppear {
                 if snapshotDetail, path.isEmpty { path = ["F"] }
+                if snapshotChart { showsChart = true }
             }
         }
     }
 
     private func library(_ chords: [Chord]) -> some View {
-        let filtered = chords.filter { $0.matches(query: query, quality: quality) }
+        let filtered = chords.filter { (root == nil || $0.root == root) && $0.matches(query: query, quality: quality) }
         return ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                Picker("코드 종류", selection: $quality) {
-                    Text("전체").tag(Optional<ChordQuality>.none)
-                    ForEach(ChordQuality.allCases) { option in
-                        Text(option.title).tag(Optional(option))
-                    }
+            VStack(alignment: .leading, spacing: 16) {
+                Picker("보기 방식", selection: $showsChart) {
+                    Text("카드").tag(false)
+                    Text("코드표").tag(true)
                 }
                 .pickerStyle(.segmented)
                 HStack {
-                    Text("표준 튜닝 · E A D G B E")
-                    Spacer()
-                    Text("\(filtered.count)개")
+                    Picker("근음", selection: $root) {
+                        Text("모든 근음").tag(Optional<Int>.none)
+                        ForEach(0..<12, id: \.self) { value in
+                            Text(Chord.rootNames[value]).tag(Optional(value))
+                        }
+                    }
+                    Picker("코드 종류", selection: $quality) {
+                        Text("모든 종류").tag(Optional<ChordQuality>.none)
+                        ForEach(ChordQuality.allCases) { option in
+                            Text(option.title).tag(Optional(option))
+                        }
+                    }
+                    Spacer(minLength: 0)
+                    Text("\(filtered.count)개").font(.caption).foregroundStyle(.secondary)
                 }
-                .font(.caption.weight(.medium))
-                .foregroundStyle(.secondary)
+                .pickerStyle(.menu)
+                .font(.subheadline)
                 if filtered.isEmpty {
                     ContentUnavailableView.search(text: query.trimmingCharacters(in: .whitespacesAndNewlines))
                         .frame(maxWidth: .infinity)
+                } else if showsChart {
+                    Text("가로는 코드 종류, 세로는 근음입니다. 운지표를 누르면 자세히 볼 수 있어요.")
+                        .font(.caption).foregroundStyle(.secondary)
+                    chordChart(filtered)
                 } else {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: dynamicTypeSize.isAccessibilitySize ? 1 : 2), spacing: 14) {
                         ForEach(filtered) { chord in
                             NavigationLink(value: chord.id) {
                                 VStack(alignment: .leading, spacing: 10) {
-                                    HStack(alignment: .firstTextBaseline) {
-                                        Text(chord.symbol).font(.title2.bold())
-                                        Spacer()
-                                        Text(chord.quality.title).font(.caption).foregroundStyle(.secondary)
-                                    }
+                                    Text(chord.symbol).font(.title2.bold())
+                                    Text(chord.quality.title).font(.caption).foregroundStyle(.secondary)
                                     ChordDiagram(voicing: chord.voicings[0], compact: true)
                                         .frame(height: 128)
                                         .accessibilityHidden(true)
                                 }
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(16)
                                 .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 20))
                             }
@@ -71,14 +86,65 @@ struct ChordLibraryView: View {
                         }
                     }
                 }
+                Text("표준 튜닝 · E A D G B E · ○ 개방현 · × 뮤트")
+                    .font(.caption).foregroundStyle(.secondary)
             }
             .padding(20)
         }
         .background(Color(uiColor: .systemGroupedBackground))
-        .searchable(text: $query, prompt: "코드 검색 · C, Am, A major")
+        .searchable(text: $query, prompt: "코드 검색 · C, B♭m7, F#")
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
         .scrollDismissesKeyboard(.interactively)
+    }
+
+    private func chordChart(_ chords: [Chord]) -> some View {
+        let qualities = ChordQuality.allCases.filter { value in chords.contains { $0.quality == value } }
+        let roots = (0..<12).filter { value in chords.contains { $0.root == value } }
+        let width: CGFloat = dynamicTypeSize.isAccessibilitySize ? 166 : 110
+        return ScrollView(.horizontal) {
+            LazyVStack(alignment: .leading, spacing: 1, pinnedViews: [.sectionHeaders]) {
+                Section {
+                    ForEach(roots, id: \.self) { value in
+                        HStack(spacing: 1) {
+                            Text(Chord.rootNames[value].replacingOccurrences(of: " / ", with: "\n"))
+                                .font(.subheadline.weight(.semibold))
+                                .frame(width: 50)
+                                .accessibilityLabel(Chord.rootNames[value])
+                            ForEach(qualities) { kind in
+                                if let chord = chords.first(where: { $0.root == value && $0.quality == kind }) {
+                                    NavigationLink(value: chord.id) {
+                                        VStack(spacing: 4) {
+                                            Text(chord.symbol).font(.subheadline.weight(.semibold))
+                                            ChordDiagram(voicing: chord.voicings[0], compact: true)
+                                                .frame(height: 105).accessibilityHidden(true)
+                                        }
+                                        .padding(.vertical, 10)
+                                        .frame(width: width)
+                                        .background(Color(uiColor: .secondarySystemGroupedBackground))
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityLabel("\(chord.symbol), \(kind.title), 운지 보기")
+                                } else {
+                                    Text("—").foregroundStyle(.secondary).frame(width: width)
+                                }
+                            }
+                        }
+                    }
+                } header: {
+                    HStack(spacing: 1) {
+                        Text("근음").frame(width: 50)
+                        ForEach(qualities) { kind in
+                            Text(kind == .major ? "메이저" : kind.suffix).frame(width: width)
+                                .accessibilityLabel(kind.title)
+                        }
+                    }
+                    .font(.caption.weight(.medium))
+                    .padding(.vertical, 12)
+                    .background(Color(uiColor: .systemGroupedBackground))
+                }
+            }
+        }
     }
 }
 
@@ -99,12 +165,14 @@ private struct ChordDetailView: View {
                     Text(chord.symbol).font(.system(size: 52, weight: .bold, design: .rounded))
                     Text("\(chord.quality.title) · \(notes)").font(.subheadline).foregroundStyle(.secondary)
                 }
-                Picker("운지", selection: $voicingIndex) {
-                    ForEach(chord.voicings.indices, id: \.self) { index in
-                        Text(chord.voicings[index].title).tag(index)
+                if chord.voicings.count > 1 {
+                    Picker("운지", selection: $voicingIndex) {
+                        ForEach(chord.voicings.indices, id: \.self) { index in
+                            Text(chord.voicings[index].title).tag(index)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .pickerStyle(.segmented)
                 Picker("운지표 표시", selection: $showsNotes) {
                     Text("손가락 번호").tag(false)
                     Text("음이름").tag(true)
