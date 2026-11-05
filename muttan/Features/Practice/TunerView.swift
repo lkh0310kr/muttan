@@ -41,6 +41,7 @@ private enum GuitarTuning: String, CaseIterable, Identifiable {
 }
 
 struct TunerView: View {
+    var screenshotMode = false
     @StateObject private var tuner = GuitarTuner()
     @AppStorage("muttan.tuner.tuning") private var tuningRawValue = GuitarTuning.standard.rawValue
     @AppStorage("muttan.tuner.string") private var stringRawValue = "auto"
@@ -48,8 +49,11 @@ struct TunerView: View {
     private var tuning: GuitarTuning { GuitarTuning(rawValue: tuningRawValue) ?? .standard }
     private var selectedString: GuitarString? { GuitarString(rawValue: stringRawValue) }
     private var targetMIDINote: Int? { selectedString.map { tuning.midi(for: $0) } }
+    private var displayedMIDINote: Double? { screenshotMode ? 40 : tuner.midi }
+    private var displayedNoteName: String? { screenshotMode ? "E2" : tuner.noteName }
+    private var displayedFrequency: Double? { screenshotMode ? 82.4 : tuner.frequency }
     private var deviation: Double? {
-        guard let midi = tuner.midi else { return nil }
+        guard let midi = displayedMIDINote else { return nil }
         return (midi - (targetMIDINote.map(Double.init) ?? midi.rounded())) * 100
     }
     private var isInTune: Bool { deviation.map { abs($0) <= 4 } ?? false }
@@ -68,9 +72,9 @@ struct TunerView: View {
                         .padding(.top, 8)
 
                     TuningPitchGraph(
-                        noteName: tuner.noteName,
+                        noteName: displayedNoteName,
                         cents: deviation,
-                        frequency: tuner.frequency,
+                        frequency: displayedFrequency,
                         feedback: feedbackText,
                         isInTune: isInTune
                     )
@@ -144,6 +148,7 @@ struct TunerView: View {
     }
 
     private var feedbackText: String {
+        if screenshotMode { return "In tune" }
         if let statusMessage = tuner.statusMessage { return statusMessage }
         guard tuner.isListening else { return "Pluck a string to tune" }
         guard let deviation else { return "Listening for a clear note…" }
@@ -156,8 +161,8 @@ struct TunerView: View {
             tuner.isListening ? tuner.stop() : tuner.start()
         } label: {
             Label(
-                tuner.isListening ? "Stop tuner" : (tuner.isStarting ? "Starting…" : "Start tuner"),
-                systemImage: tuner.isListening ? "stop.fill" : "mic.fill"
+                screenshotMode ? "Preview mode" : (tuner.isListening ? "Stop tuner" : (tuner.isStarting ? "Starting…" : "Start tuner")),
+                systemImage: screenshotMode ? "waveform" : (tuner.isListening ? "stop.fill" : "mic.fill")
             )
             .font(.headline)
             .frame(maxWidth: .infinity)
@@ -166,7 +171,7 @@ struct TunerView: View {
             .foregroundStyle(Color.black.opacity(0.88))
         }
         .buttonStyle(.plain)
-        .disabled(tuner.isStarting)
+        .disabled(screenshotMode || tuner.isStarting)
     }
 }
 

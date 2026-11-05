@@ -1,19 +1,27 @@
 import SwiftUI
 
 struct AppTabView: View {
+    @State private var selectedTab = ProcessInfo.processInfo.arguments
+        .first(where: { $0.hasPrefix("--ui-snapshot=") })
+        .map { String($0.dropFirst("--ui-snapshot=".count)) } ?? "home"
+
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem { Label("학습", systemImage: "music.note.list") }
+                .tag("home")
 
-            TunerView()
+            TunerView(screenshotMode: ProcessInfo.processInfo.arguments.contains("--ui-snapshot-mode"))
                 .tabItem { Label("튜너", systemImage: "tuningfork") }
+                .tag("tuner")
 
             ProgressViewScreen()
                 .tabItem { Label("기록", systemImage: "chart.bar.fill") }
+                .tag("progress")
 
             SettingsView()
                 .tabItem { Label("설정", systemImage: "gearshape") }
+                .tag("settings")
         }
         .tint(.mint)
     }

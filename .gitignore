@@ -1,3 +1,5 @@
 .workspace/
 xcuserdata/
 *.xcuserstate
+.derivedData/
+artifacts/ui-screenshots/
