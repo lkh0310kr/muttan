@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		A10000000000000000000001 /* MuttanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* MuttanApp.swift */; };
 		A10000000000000000000002 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* AppTabView.swift */; };
-		A10000000000000000000003 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000003 /* HomeView.swift */; };
+		A10000000000000000000003 /* ChordLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000003 /* ChordLibraryView.swift */; };
 		A10000000000000000000004 /* TunerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000004 /* TunerView.swift */; };
 		A10000000000000000000006 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000006 /* SettingsView.swift */; };
 		A10000000000000000000007 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000009 /* DebugLog.swift */; };
 		A10000000000000000000008 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000010 /* PitchDetector.swift */; };
+		A10000000000000000000011 = {isa = PBXBuildFile; fileRef = B10000000000000000000011; };
+		A10000000000000000000012 = {isa = PBXBuildFile; fileRef = B10000000000000000000012; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B10000000000000000000001 /* MuttanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuttanApp.swift; sourceTree = "<group>"; };
 		B10000000000000000000002 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
-		B10000000000000000000003 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B10000000000000000000003 /* ChordLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordLibraryView.swift; sourceTree = "<group>"; };
 		B10000000000000000000004 /* TunerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerView.swift; sourceTree = "<group>"; };
 		B10000000000000000000006 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B10000000000000000000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B10000000000000000000008 /* muttan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muttan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B10000000000000000000009 /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		B10000000000000000000010 /* PitchDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchDetector.swift; sourceTree = "<group>"; };
+		B10000000000000000000011 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chord.swift; sourceTree = "<group>"; };
+		B10000000000000000000012 = {isa = PBXFileReference; lastKnownFileType = text.json; path = chords.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,19 +90,21 @@
 		C10000000000000000000006 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				C10000000000000000000007 /* Home */,
+				C10000000000000000000007 /* Chords */,
 				C10000000000000000000008 /* Practice */,
 				C1000000000000000000000A /* Settings */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		C10000000000000000000007 /* Home */ = {
+		C10000000000000000000007 /* Chords */ = {
 			isa = PBXGroup;
 			children = (
-				B10000000000000000000003 /* HomeView.swift */,
+				B10000000000000000000003 /* ChordLibraryView.swift */,
+				B10000000000000000000011,
+				B10000000000000000000012,
 			);
-			path = Home;
+			path = Chords;
 			sourceTree = "<group>";
 		};
 		C10000000000000000000008 /* Practice */ = {
@@ -175,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000000000000000000012,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +194,8 @@
 			files = (
 				A10000000000000000000001 /* MuttanApp.swift in Sources */,
 				A10000000000000000000002 /* AppTabView.swift in Sources */,
-				A10000000000000000000003 /* HomeView.swift in Sources */,
+				A10000000000000000000003 /* ChordLibraryView.swift in Sources */,
+				A10000000000000000000011,
 				A10000000000000000000004 /* TunerView.swift in Sources */,
 				A10000000000000000000006 /* SettingsView.swift in Sources */,
 				A10000000000000000000007 /* DebugLog.swift in Sources */,
