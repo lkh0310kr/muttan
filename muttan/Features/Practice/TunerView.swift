@@ -41,6 +41,7 @@ private enum GuitarTuning: String, CaseIterable, Identifiable {
 }
 
 struct TunerView: View {
+    @Environment(\.colorScheme) private var colorScheme
     var screenshotMode = false
     @StateObject private var tuner = GuitarTuner()
     @AppStorage("muttan.tuner.tuning") private var tuningRawValue = GuitarTuning.standard.rawValue
@@ -96,14 +97,19 @@ struct TunerView: View {
                 .padding(.horizontal, 18)
                 .frame(maxWidth: 560)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(red: 0.075, green: 0.08, blue: 0.095).ignoresSafeArea())
+                .background(screenBackground.ignoresSafeArea())
             }
             .toolbar(.hidden, for: .navigationBar)
             .onAppear { DebugLog.record("screen.tuner.appear") }
             .onDisappear { tuner.stop() }
             .sensoryFeedback(.success, trigger: isInTune)
         }
-        .preferredColorScheme(.dark)
+    }
+
+    private var screenBackground: Color {
+        colorScheme == .dark
+            ? Color(red: 0.075, green: 0.08, blue: 0.095)
+            : Color(uiColor: .systemBackground)
     }
 
     private var tuningHeader: some View {
@@ -124,7 +130,7 @@ struct TunerView: View {
                     }
                     Text(tuning.title)
                         .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.62))
+                        .foregroundStyle(colorScheme == .dark ? Color.white.opacity(0.62) : Color.secondary)
                 }
                 .contentShape(Rectangle())
             }
@@ -143,7 +149,7 @@ struct TunerView: View {
             .fixedSize()
             .accessibilityLabel("Automatic string detection")
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(colorScheme == .dark ? Color.white : Color.primary)
         .frame(height: 58)
     }
 
@@ -171,11 +177,13 @@ struct TunerView: View {
             .foregroundStyle(Color.black.opacity(0.88))
         }
         .buttonStyle(.plain)
-        .disabled(screenshotMode || tuner.isStarting)
+        .disabled(tuner.isStarting)
+        .allowsHitTesting(!screenshotMode)
     }
 }
 
 private struct TuningPitchGraph: View {
+    @Environment(\.colorScheme) private var colorScheme
     let noteName: String?
     let cents: Double?
     let frequency: Double?
@@ -199,7 +207,7 @@ private struct TuningPitchGraph: View {
                         grid.move(to: CGPoint(x: 0, y: y))
                         grid.addLine(to: CGPoint(x: size.width, y: y))
                     }
-                    context.stroke(grid, with: .color(.white.opacity(0.045)), lineWidth: 1)
+                    context.stroke(grid, with: .color(Color.primary.opacity(colorScheme == .dark ? 0.045 : 0.07)), lineWidth: 1)
 
                     var reference = Path()
                     reference.move(to: CGPoint(x: center, y: 0))
@@ -213,7 +221,7 @@ private struct TuningPitchGraph: View {
                     Text("♯")
                 }
                 .font(.title2.weight(.medium))
-                .foregroundStyle(.white.opacity(0.56))
+                .foregroundStyle(.secondary)
                 .padding(.horizontal, 10)
                 .position(x: center, y: geometry.size.height * 0.48)
 
@@ -223,7 +231,7 @@ private struct TuningPitchGraph: View {
                             .font(.system(size: 18, weight: .bold))
                             .foregroundStyle(.mint)
                             .frame(width: 38, height: 38)
-                            .background(Color(red: 0.075, green: 0.08, blue: 0.095), in: Circle())
+                            .background(colorScheme == .dark ? Color(red: 0.075, green: 0.08, blue: 0.095) : Color(uiColor: .systemBackground), in: Circle())
                             .overlay(Circle().stroke(.mint, lineWidth: 2))
                             .transition(.scale.combined(with: .opacity))
                     }
@@ -231,10 +239,10 @@ private struct TuningPitchGraph: View {
                     Text(noteName ?? "—")
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .monospacedDigit()
-                        .foregroundStyle(noteName == nil ? .white.opacity(0.5) : .mint)
+                        .foregroundStyle(noteName == nil ? Color.secondary : (colorScheme == .dark ? Color.mint : Color.primary))
                         .frame(minWidth: 54, minHeight: 42)
-                        .background(Color(red: 0.105, green: 0.115, blue: 0.135), in: Capsule())
-                        .overlay(Capsule().stroke(.white.opacity(0.12), lineWidth: 1))
+                        .background(colorScheme == .dark ? Color(red: 0.105, green: 0.115, blue: 0.135) : Color(uiColor: .secondarySystemBackground), in: Capsule())
+                        .overlay(Capsule().stroke(Color.primary.opacity(0.12), lineWidth: 1))
                 }
                 .position(x: center + normalized * (center - 42), y: geometry.size.height * 0.48)
                 .animation(.snappy(duration: 0.16), value: cents)
@@ -244,12 +252,12 @@ private struct TuningPitchGraph: View {
                     Text(feedback.uppercased())
                         .font(.caption.weight(.semibold))
                         .tracking(0.9)
-                        .foregroundStyle(isInTune ? .mint : .white.opacity(0.8))
+                        .foregroundStyle(isInTune ? Color.mint : (colorScheme == .dark ? Color.white.opacity(0.8) : Color.primary.opacity(0.8)))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                     Text(frequency.map { String(format: "%.1f Hz", $0) } ?? " ")
                         .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.white.opacity(0.55))
+                        .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .padding(.bottom, 12)
@@ -268,6 +276,7 @@ private struct TuningPitchGraph: View {
 }
 
 private struct HeadstockStringPicker: View {
+    @Environment(\.colorScheme) private var colorScheme
     let tuning: GuitarTuning
     let selectedString: GuitarString?
     let onSelect: (GuitarString) -> Void
@@ -298,15 +307,15 @@ private struct HeadstockStringPicker: View {
                             .font(.system(size: 16, weight: .semibold, design: .rounded))
                         Text("\(string.number)")
                             .font(.caption2.monospacedDigit())
-                            .foregroundStyle(.white.opacity(0.56))
+                            .foregroundStyle(colorScheme == .dark ? Color.white.opacity(0.56) : Color.secondary)
                     }
-                    .foregroundStyle(selectedString == string ? .mint : .white)
+                    .foregroundStyle(selectedString == string ? Color.mint : (colorScheme == .dark ? Color.white : Color.primary))
                     .frame(width: 56, height: 56)
                     .background {
-                        Circle().fill(selectedString == string ? Color.mint.opacity(0.12) : Color.white.opacity(0.035))
+                        Circle().fill(selectedString == string ? Color.mint.opacity(0.12) : Color.primary.opacity(colorScheme == .dark ? 0.035 : 0.04))
                     }
                     .overlay {
-                        Circle().stroke(selectedString == string ? Color.mint : Color.white.opacity(0.22), lineWidth: selectedString == string ? 2 : 1)
+                        Circle().stroke(selectedString == string ? Color.mint : Color.primary.opacity(0.22), lineWidth: selectedString == string ? 2 : 1)
                     }
                 }
                 .buttonStyle(.plain)

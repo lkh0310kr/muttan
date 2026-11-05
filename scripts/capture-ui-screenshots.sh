@@ -21,6 +21,7 @@ print(matches[0]["udid"])
 mkdir -p "$OUTPUT_DIR"
 echo "Building $SCHEME for $DEVICE_NAME ($DEVICE_ID)..."
 xcodebuild \
+  -quiet \
   -project "$PROJECT" \
   -scheme "$SCHEME" \
   -configuration Debug \
@@ -35,15 +36,17 @@ if ! xcrun simctl list devices booted | grep -q "$DEVICE_ID"; then
 fi
 xcrun simctl bootstatus "$DEVICE_ID" -b
 xcrun simctl status_bar "$DEVICE_ID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
-xcrun simctl ui "$DEVICE_ID" appearance light
 xcrun simctl install "$DEVICE_ID" "$APP_PATH"
 
-for screen in home tuner progress settings; do
-  echo "Capturing $screen..."
-  xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
-    "--ui-snapshot=$screen" --ui-snapshot-mode >/dev/null
-  sleep 2
-  xcrun simctl io "$DEVICE_ID" screenshot "$OUTPUT_DIR/$screen.png" >/dev/null
+for appearance in light dark; do
+  xcrun simctl ui "$DEVICE_ID" appearance "$appearance"
+  for screen in home tuner progress settings; do
+    echo "Capturing $screen-$appearance..."
+    xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
+      "--ui-snapshot=$screen" "--ui-snapshot-appearance=$appearance" --ui-snapshot-mode >/dev/null
+    sleep 2
+    xcrun simctl io "$DEVICE_ID" screenshot "$OUTPUT_DIR/$screen-$appearance.png" >/dev/null
+  done
 done
 
 echo "Screenshots saved to $OUTPUT_DIR"

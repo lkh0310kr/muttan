@@ -1,9 +1,15 @@
 import SwiftUI
 
 struct AppTabView: View {
+    private let launchArguments = ProcessInfo.processInfo.arguments
     @State private var selectedTab = ProcessInfo.processInfo.arguments
         .first(where: { $0.hasPrefix("--ui-snapshot=") })
         .map { String($0.dropFirst("--ui-snapshot=".count)) } ?? "home"
+
+    private var snapshotAppearance: ColorScheme? {
+        guard let argument = launchArguments.first(where: { $0.hasPrefix("--ui-snapshot-appearance=") }) else { return nil }
+        return argument.hasSuffix("=dark") ? .dark : .light
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -24,5 +30,6 @@ struct AppTabView: View {
                 .tag("settings")
         }
         .tint(.mint)
+        .preferredColorScheme(snapshotAppearance)
     }
 }

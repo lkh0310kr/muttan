@@ -6,4 +6,4 @@ The app includes a practice home, live microphone tuner, progress view, settings
 
 ## Capture UI screenshots
 
-Run `./scripts/capture-ui-screenshots.sh` to build the app, launch each screen in a background iOS simulator, and save screenshots to `artifacts/ui-screenshots/`. Set `DEVICE_NAME` to choose another installed simulator, or pass an output folder as the first argument. The tuner uses fixed preview data in this mode and never requests microphone access.
+Run `./scripts/capture-ui-screenshots.sh` to build the app, launch each screen in light and dark appearance on a background iOS simulator, and save pairs such as `home-light.png` and `home-dark.png` to `artifacts/ui-screenshots/`. Set `DEVICE_NAME` to choose another installed simulator, or pass an output folder as the first argument. The tuner uses fixed preview data in this mode and never requests microphone access.
