@@ -2,8 +2,8 @@ import SwiftUI
 
 struct HomeView: View {
     private let lessons = [
-        Lesson(title: "첫 음정 연주하기", subtitle: "기초 · 10분", symbol: "music.note", progress: 0.35),
-        Lesson(title: "오픈 코드 익히기", subtitle: "코드 · 15분", symbol: "guitars", progress: 0)
+        Lesson(title: "첫 음정 연주하기", subtitle: "기초 · 10분", symbol: "music.note"),
+        Lesson(title: "오픈 코드 익히기", subtitle: "코드 · 15분", symbol: "guitars")
     ]
 
     var body: some View {
@@ -11,7 +11,6 @@ struct HomeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
                     greeting
-                    streakCard
 
                     VStack(alignment: .leading, spacing: 14) {
                         sectionTitle("오늘의 학습", action: "전체 보기")
@@ -46,26 +45,6 @@ struct HomeView: View {
         }
     }
 
-    private var streakCard: some View {
-        HStack(spacing: 16) {
-            Image(systemName: "flame.fill")
-                .font(.system(size: 28))
-                .foregroundStyle(.orange)
-                .frame(width: 56, height: 56)
-                .background(.orange.opacity(0.14), in: RoundedRectangle(cornerRadius: 16))
-            VStack(alignment: .leading, spacing: 4) {
-                Text("연습 스트릭")
-                    .font(.headline)
-                Text("첫 연습을 시작해 기록을 만들어 보세요")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-            Spacer(minLength: 0)
-        }
-        .padding(18)
-        .background(Color(uiColor: .secondarySystemBackground), in: RoundedRectangle(cornerRadius: 20))
-    }
-
     private func sectionTitle(_ title: String, action: String) -> some View {
         HStack {
             Text(title).font(.title2.bold())
@@ -82,7 +61,6 @@ private struct Lesson: Identifiable {
     let title: String
     let subtitle: String
     let symbol: String
-    let progress: Double
 }
 
 private struct LessonCard: View {
@@ -104,10 +82,6 @@ private struct LessonCard: View {
                 Image(systemName: "chevron.right")
                     .font(.footnote.weight(.bold))
                     .foregroundStyle(.tertiary)
-            }
-            if lesson.progress > 0 {
-                ProgressView(value: lesson.progress)
-                    .tint(.mint)
             }
         }
         .padding(16)

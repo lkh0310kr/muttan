@@ -21,10 +21,6 @@ struct AppTabView: View {
                 .tabItem { Label("튜너", systemImage: "tuningfork") }
                 .tag("tuner")
 
-            ProgressViewScreen()
-                .tabItem { Label("기록", systemImage: "chart.bar.fill") }
-                .tag("progress")
-
             SettingsView()
                 .tabItem { Label("설정", systemImage: "gearshape") }
                 .tag("settings")

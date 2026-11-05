@@ -11,7 +11,6 @@
 		A10000000000000000000002 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* AppTabView.swift */; };
 		A10000000000000000000003 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000003 /* HomeView.swift */; };
 		A10000000000000000000004 /* TunerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000004 /* TunerView.swift */; };
-		A10000000000000000000005 /* ProgressViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000005 /* ProgressViewScreen.swift */; };
 		A10000000000000000000006 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000006 /* SettingsView.swift */; };
 		A10000000000000000000007 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000009 /* DebugLog.swift */; };
 		A10000000000000000000008 /* PitchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000010 /* PitchDetector.swift */; };
@@ -22,7 +21,6 @@
 		B10000000000000000000002 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		B10000000000000000000003 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B10000000000000000000004 /* TunerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerView.swift; sourceTree = "<group>"; };
-		B10000000000000000000005 /* ProgressViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewScreen.swift; sourceTree = "<group>"; };
 		B10000000000000000000006 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B10000000000000000000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B10000000000000000000008 /* muttan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muttan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +88,6 @@
 			children = (
 				C10000000000000000000007 /* Home */,
 				C10000000000000000000008 /* Practice */,
-				C10000000000000000000009 /* Progress */,
 				C1000000000000000000000A /* Settings */,
 			);
 			path = Features;
@@ -111,14 +108,6 @@
 				B10000000000000000000010 /* PitchDetector.swift */,
 			);
 			path = Practice;
-			sourceTree = "<group>";
-		};
-		C10000000000000000000009 /* Progress */ = {
-			isa = PBXGroup;
-			children = (
-				B10000000000000000000005 /* ProgressViewScreen.swift */,
-			);
-			path = Progress;
 			sourceTree = "<group>";
 		};
 		C1000000000000000000000A /* Settings */ = {
@@ -200,7 +189,6 @@
 				A10000000000000000000002 /* AppTabView.swift in Sources */,
 				A10000000000000000000003 /* HomeView.swift in Sources */,
 				A10000000000000000000004 /* TunerView.swift in Sources */,
-				A10000000000000000000005 /* ProgressViewScreen.swift in Sources */,
 				A10000000000000000000006 /* SettingsView.swift in Sources */,
 				A10000000000000000000007 /* DebugLog.swift in Sources */,
 				A10000000000000000000008 /* PitchDetector.swift in Sources */,
