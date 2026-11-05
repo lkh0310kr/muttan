@@ -4,68 +4,59 @@ import SwiftUI
 struct TunerView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.openURL) private var openURL
+    @State private var isVisible = false
+    @State private var manualString: GuitarString?
     var screenshotMode = false
     @StateObject private var tuner = GuitarTuner()
     @AppStorage("muttan.tuner.tuning") private var tuningRawValue = GuitarTuning.standard.rawValue
-    @AppStorage("muttan.tuner.string") private var stringRawValue = "auto"
 
     private var tuning: GuitarTuning { screenshotMode ? .standard : (GuitarTuning(rawValue: tuningRawValue) ?? .standard) }
-    private var selectedString: GuitarString? { screenshotMode ? nil : GuitarString(rawValue: stringRawValue) }
+    private var selectedString: GuitarString? { screenshotMode ? nil : manualString }
     private var activeString: GuitarString? {
         selectedString ?? displayedMIDINote.flatMap { tuning.nearestString(to: $0) }
     }
     private var targetMIDINote: Int? { activeString.map { tuning.midi(for: $0) } }
-    private var targetDescription: String {
-        guard let string = activeString, let midi = targetMIDINote else { return "개방현을 연주하세요" }
-        let target = TunerPitchReading(midi: Double(midi))
-        return String(format: "%d번 현 · %@ · %.1f Hz", string.number, target.noteName, target.frequency)
-    }
     private var displayedMIDINote: Double? { screenshotMode ? 40 : tuner.midi }
-    private var displayedNoteName: String? { screenshotMode ? "E2" : tuner.noteName }
-    private var displayedFrequency: Double? { screenshotMode ? 82.4 : tuner.frequency }
+    private var displayedNoteName: String? { displayedMIDINote.map { TunerPitchReading(midi: $0).pitchClassName } }
     private var deviation: Double? {
         guard let midi = displayedMIDINote, let target = targetMIDINote else { return nil }
         return (midi - Double(target)) * 100
     }
     private var isInTune: Bool { deviation.map { abs($0) <= 4 } ?? false }
-    private var autoBinding: Binding<Bool> {
-        Binding(
-            get: { selectedString == nil },
-            set: { stringRawValue = $0 ? "auto" : (selectedString?.rawValue ?? activeString?.rawValue ?? GuitarString.lowE.rawValue) }
-        )
-    }
-
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                let pitchHeight = min(230, max(120, min(geometry.size.height * 0.30, geometry.size.height - 326)))
-                let instrumentHeight = min(330, max(0, geometry.size.height - pitchHeight - 136))
+                let pitchHeight = min(190, geometry.size.height * 0.28)
+                let errorHeight: CGFloat = tuner.statusMessage == nil ? 0 : 86
+                let instrumentHeight = min(380, max(0, geometry.size.height - pitchHeight - 100 - errorHeight))
                 VStack(spacing: 0) {
-                    tuningHeader
-                        .padding(.top, 8)
-
-                    TuningPitchGraph(
-                        target: targetDescription,
-                        noteName: displayedNoteName,
-                        cents: deviation,
-                        frequency: displayedFrequency,
-                        feedback: feedbackText,
-                        isInTune: isInTune
-                    )
-                    .frame(height: pitchHeight)
-
+                    tuningHeader.padding(.top, 8)
+                    Spacer(minLength: 16)
+                    TuningPitchGraph(noteName: displayedNoteName, cents: deviation,
+                                     feedback: feedbackText, isInTune: isInTune)
+                        .frame(height: pitchHeight)
                     HeadstockStringPicker(
                         tuning: tuning,
                         selectedString: activeString,
-                        onSelect: { stringRawValue = $0.rawValue }
+                        lockedString: selectedString,
+                        onSelect: { manualString = manualString == $0 ? nil : $0 }
                     )
                     .frame(height: instrumentHeight)
-                    .layoutPriority(1)
-
-                    Spacer(minLength: 8)
-
-                    tunerButton
-                        .padding(.bottom, 8)
+                    Spacer(minLength: 16)
+                    if let message = tuner.statusMessage, !screenshotMode {
+                        VStack(spacing: 8) {
+                            Text(message).font(.footnote).foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                            Button(tuner.permissionDenied ? "마이크 설정 열기" : "다시 듣기") {
+                                if tuner.permissionDenied, let url = URL(string: UIApplication.openSettingsURLString) {
+                                    openURL(url)
+                                } else { tuner.start() }
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                        .padding(.bottom, 12)
+                    }
                 }
                 .padding(.horizontal, 18)
                 .frame(maxWidth: 560)
@@ -73,13 +64,22 @@ struct TunerView: View {
                 .background(screenBackground.ignoresSafeArea())
             }
             .toolbar(.hidden, for: .navigationBar)
-            .onAppear { DebugLog.record("screen.tuner.appear") }
-            .onDisappear { tuner.stop() }
-            .onChange(of: scenePhase) { _, phase in
-                if phase == .background { tuner.pause(reason: "튜너가 일시 정지됐어요. 다시 시작해 주세요.") }
+            .onAppear {
+                isVisible = true
+                manualString = nil
+                DebugLog.record("screen.tuner.appear")
+                if !screenshotMode { tuner.start() }
             }
-            .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { _ in
-                tuner.pause(reason: "오디오가 중단됐어요. 다시 시작해 주세요.")
+            .onDisappear { isVisible = false; tuner.stop() }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .background { tuner.stop() }
+                if phase == .active, isVisible, !screenshotMode { tuner.start() }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { notification in
+                if let type = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                   type == AVAudioSession.InterruptionType.began.rawValue {
+                    tuner.pause(reason: "오디오가 중단됐어요. 다시 들어 주세요.")
+                }
             }
             .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.routeChangeNotification)) { notification in
                 if let reason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt, reason == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
@@ -97,80 +97,41 @@ struct TunerView: View {
     }
 
     private var tuningHeader: some View {
-        HStack(alignment: .center, spacing: 16) {
+        HStack {
             Menu {
-                Picker("Guitar tuning", selection: $tuningRawValue) {
+                Picker("튜닝", selection: $tuningRawValue) {
                     ForEach(GuitarTuning.allCases) { option in
                         Text(option.title).tag(option.rawValue)
                     }
                 }
             } label: {
-                VStack(alignment: .leading, spacing: 3) {
-                    HStack(spacing: 6) {
-                        Text("6현 기타")
-                            .font(.headline)
-                        Image(systemName: "chevron.right")
-                            .font(.caption.weight(.bold))
-                    }
-                    Text(tuning.title)
-                        .font(.subheadline)
-                        .foregroundStyle(colorScheme == .dark ? Color.white.opacity(0.62) : Color.secondary)
+                HStack(spacing: 6) {
+                    Text(tuning.title).font(.headline)
+                    Image(systemName: "chevron.down").font(.caption.weight(.semibold))
                 }
+                .frame(minHeight: 44)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("6현 기타, \(tuning.title). 튜닝 선택")
-
-            Spacer(minLength: 8)
-
-            Toggle(isOn: autoBinding) {
-                Text("자동")
-                    .font(.caption.weight(.semibold))
-            }
-            .toggleStyle(.switch)
-            .tint(.instrumentAccent)
-            .fixedSize()
-            .accessibilityLabel("자동 현 감지")
+            .accessibilityLabel("\(tuning.title), 튜닝 선택")
+            Spacer()
         }
-        .foregroundStyle(colorScheme == .dark ? Color.white : Color.primary)
-        .frame(height: 58)
     }
 
     private var feedbackText: String {
         if screenshotMode { return "음정이 맞아요" }
         if let statusMessage = tuner.statusMessage { return statusMessage }
-        guard tuner.isListening else { return "튜너를 켜고 줄을 튕겨 주세요" }
+        guard tuner.isListening else { return "기타 소리를 기다리고 있어요" }
         guard let deviation else { return displayedMIDINote == nil ? "기타 소리를 듣고 있어요" : "개방현을 연주하세요" }
         if abs(deviation) <= 4 { return "음정이 맞아요" }
         return deviation < 0 ? (abs(deviation) > 50 ? "음정을 높이세요" : "음정을 조금 높이세요") : (abs(deviation) > 50 ? "음정을 낮추세요" : "음정을 조금 낮추세요")
-    }
-
-    private var tunerButton: some View {
-        Button {
-            tuner.isListening ? tuner.stop() : tuner.start()
-        } label: {
-            Label(
-                screenshotMode ? "미리보기" : (tuner.isListening ? "튜너 중지" : (tuner.isStarting ? "시작하는 중…" : "튜너 시작")),
-                systemImage: screenshotMode ? "waveform" : (tuner.isListening ? "stop.fill" : "mic.fill")
-            )
-            .font(.headline)
-            .frame(maxWidth: .infinity)
-            .frame(height: 54)
-            .background(Color.instrumentAccent, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .foregroundStyle(colorScheme == .dark ? Color.black : Color.white)
-        }
-        .buttonStyle(.plain)
-        .disabled(tuner.isStarting)
-        .allowsHitTesting(!screenshotMode)
     }
 }
 
 private struct TuningPitchGraph: View {
     @Environment(\.colorScheme) private var colorScheme
-    let target: String
     let noteName: String?
     let cents: Double?
-    let frequency: Double?
     let feedback: String
     let isInTune: Bool
 
@@ -178,10 +139,9 @@ private struct TuningPitchGraph: View {
         GeometryReader { geometry in
             let center = geometry.size.width / 2
             let normalized = CGFloat(max(-50, min(50, cents ?? 0)) / 50)
-            let axisFraction: CGFloat = geometry.size.height < 180 ? 0.35 : 0.40
+            let axisY = geometry.size.height * 0.45
             ZStack {
                 Canvas { context, size in
-                    let axisY = size.height * axisFraction
                     var ticks = Path()
                     ticks.move(to: CGPoint(x: 42, y: axisY))
                     ticks.addLine(to: CGPoint(x: size.width - 42, y: axisY))
@@ -191,85 +151,44 @@ private struct TuningPitchGraph: View {
                         ticks.move(to: CGPoint(x: x, y: axisY - length))
                         ticks.addLine(to: CGPoint(x: x, y: axisY + length))
                     }
-                    context.stroke(ticks, with: .color(Color.primary.opacity(0.18)), lineWidth: 1)
+                    context.stroke(ticks, with: .color(Color.primary.opacity(0.15)), lineWidth: 1)
                     var reference = Path()
-                    reference.move(to: CGPoint(x: center, y: 30))
-                    reference.addLine(to: CGPoint(x: center, y: size.height * 0.65))
-                    context.stroke(reference, with: .color(.instrumentAccent.opacity(0.8)), lineWidth: 1.5)
+                    reference.move(to: CGPoint(x: center, y: axisY - 16))
+                    reference.addLine(to: CGPoint(x: center, y: axisY + 16))
+                    context.stroke(reference, with: .color(.instrumentAccent.opacity(0.6)), lineWidth: 1.5)
                 }
-
-                Text(target)
-                    .font(.caption2.weight(.semibold)).foregroundStyle(.secondary)
-                    .lineLimit(1).minimumScaleFactor(0.7)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    .padding(.top, 8)
-                HStack {
-                    Text("♭")
-                    Spacer()
-                    Text("♯")
+                HStack { Text("♭"); Spacer(); Text("♯") }
+                    .font(.title2).foregroundStyle(.secondary)
+                    .position(x: center, y: axisY)
+                Text(noteName ?? "—")
+                    .font(.system(size: 44, weight: .medium, design: .rounded))
+                    .foregroundStyle(isInTune ? Color.instrumentAccent : Color.primary)
+                    .frame(width: 72, height: 72)
+                    .background(colorScheme == .dark ? Color(red: 0.075, green: 0.08, blue: 0.095) : Color(uiColor: .systemBackground))
+                    .position(x: center + normalized * (center - 42), y: axisY)
+                    .animation(.snappy(duration: 0.16), value: cents)
+                if isInTune {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundStyle(Color.instrumentAccent)
+                        .position(x: center, y: geometry.size.height * 0.86)
+                        .accessibilityHidden(true)
+                } else if cents == nil {
+                    Text(noteName == nil ? "줄을 튕겨 주세요" : "개방현을 연주하세요").font(.footnote).foregroundStyle(.secondary)
+                        .position(x: center, y: geometry.size.height * 0.86)
                 }
-                .font(.title2.weight(.medium))
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, 10)
-                .position(x: center, y: geometry.size.height * axisFraction)
-
-                VStack(spacing: 5) {
-                    if isInTune && geometry.size.height >= 180 {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(Color.instrumentAccent)
-                            .frame(width: 38, height: 38)
-                            .background(colorScheme == .dark ? Color(red: 0.075, green: 0.08, blue: 0.095) : Color(uiColor: .systemBackground), in: Circle())
-                            .overlay(Circle().stroke(Color.instrumentAccent, lineWidth: 2))
-                            .transition(.scale.combined(with: .opacity))
-                    }
-
-                    Text(noteName ?? "—")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(noteName == nil ? Color.secondary : (colorScheme == .dark ? Color.instrumentAccent : Color.primary))
-                        .frame(minWidth: 54, minHeight: 42)
-                        .background(colorScheme == .dark ? Color(red: 0.105, green: 0.115, blue: 0.135) : Color(uiColor: .secondarySystemBackground), in: Capsule())
-                        .overlay(Capsule().stroke(Color.primary.opacity(0.12), lineWidth: 1))
-                }
-                .position(x: center + normalized * (center - 42), y: geometry.size.height * axisFraction)
-                .animation(.snappy(duration: 0.16), value: cents)
-                .animation(.spring(response: 0.25, dampingFraction: 0.7), value: isInTune)
-
-                VStack(spacing: 4) {
-                    if let cents {
-                        Text(String(format: "%+.0f 센트", abs(cents) < 0.5 ? 0 : cents))
-                            .font(.system(.title3, design: .rounded, weight: .semibold))
-                            .monospacedDigit().foregroundStyle(isInTune ? Color.instrumentAccent : Color.primary)
-                    }
-                    Text(feedback)
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(isInTune ? Color.instrumentAccent : (colorScheme == .dark ? Color.white.opacity(0.8) : Color.primary.opacity(0.8)))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.75)
-                    Text(frequency.map { String(format: "%.1f Hz", $0) } ?? " ")
-                        .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 12)
             }
-            .clipped()
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(graphAccessibilityLabel)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(noteName ?? "감지된 음 없음"). \(feedback)")
         }
         .accessibilityAddTraits(.updatesFrequently)
-    }
-
-    private var graphAccessibilityLabel: String {
-        guard let cents else { return "튜너. \(feedback)" }
-        return String(format: "%@, %.0f 센트 %@. %@", noteName ?? "감지된 음 없음", abs(cents), cents < 0 ? "낮음" : "높음", feedback)
     }
 }
 
 private struct HeadstockStringPicker: View {
     let tuning: GuitarTuning
     let selectedString: GuitarString?
+    let lockedString: GuitarString?
     let onSelect: (GuitarString) -> Void
 
     var body: some View {
@@ -287,10 +206,7 @@ private struct HeadstockStringPicker: View {
                     let target = TunerPitchReading(midi: Double(tuning.midi(for: route.string)))
                     let selected = route.string == selectedString
                     Button { onSelect(route.string) } label: {
-                        VStack(spacing: 2) {
-                            Text(target.noteName).font(.system(.body, design: .rounded, weight: .semibold))
-                            Text("\(route.string.number)번 현").font(.system(size: 10)).foregroundStyle(.secondary)
-                        }
+                        Text(target.pitchClassName).font(.system(.title3, design: .rounded, weight: .medium))
                         .foregroundStyle(selected ? Color.instrumentAccent : Color.primary)
                         .frame(width: diameter, height: diameter)
                         .background(selected ? Color.instrumentAccent.opacity(0.09) : Color(uiColor: .secondarySystemBackground), in: Circle())
@@ -300,6 +216,7 @@ private struct HeadstockStringPicker: View {
                     .position(x: route.post.x < 0.5 ? diameter / 2 : geometry.size.width - diameter / 2,
                               y: inset + route.post.y * headHeight)
                     .accessibilityLabel("\(route.string.number)번 현, \(target.noteName)")
+                    .accessibilityHint(lockedString == route.string ? "다시 누르면 자동 감지로 돌아갑니다." : "이 현의 음정을 맞춥니다.")
                     .accessibilityAddTraits(selected ? .isSelected : [])
                 }
             }
@@ -308,6 +225,7 @@ private struct HeadstockStringPicker: View {
 }
 
 private struct GuitarHeadstock: View {
+    @Environment(\.colorScheme) private var colorScheme
     let selectedString: GuitarString?
 
     var body: some View {
@@ -329,7 +247,7 @@ private struct GuitarHeadstock: View {
                         .position(x: w * (left ? 0.06 : 0.94), y: h * route.post.y)
                 }
                 HeadstockShape()
-                    .fill(LinearGradient(colors: [Color(red: 0.28, green: 0.18, blue: 0.12), Color(red: 0.19, green: 0.12, blue: 0.085)], startPoint: .leading, endPoint: .trailing))
+                    .fill(LinearGradient(colors: colorScheme == .dark ? [Color(red: 0.28, green: 0.18, blue: 0.12), Color(red: 0.19, green: 0.12, blue: 0.085)] : [Color(red: 0.88, green: 0.75, blue: 0.57), Color(red: 0.79, green: 0.64, blue: 0.45)], startPoint: .leading, endPoint: .trailing))
                     .overlay(HeadstockShape().stroke(Color(red: 0.65, green: 0.48, blue: 0.32), lineWidth: 1.2))
                 Rectangle()
                     .fill(Color(red: 0.12, green: 0.105, blue: 0.09))
@@ -349,12 +267,18 @@ private struct GuitarHeadstock: View {
                     .position(x: w / 2, y: h * HeadstockStringRoute.nutY)
                 Canvas { context, _ in
                     for route in HeadstockStringRoute.all {
-                        var string = Path()
-                        string.move(to: CGPoint(x: route.nut.x * w, y: h))
-                        string.addLine(to: CGPoint(x: route.nut.x * w, y: route.nut.y * h))
-                        string.addLine(to: CGPoint(x: route.post.x * w, y: route.post.y * h))
                         let selected = route.string == selectedString
-                        context.stroke(string, with: .color(selected ? .mint : Color(red: 0.79, green: 0.77, blue: 0.66)), style: StrokeStyle(lineWidth: selected ? 2.4 : route.width, lineCap: .round, lineJoin: .round))
+                        let style = StrokeStyle(lineWidth: selected ? 2.4 : route.width, lineCap: .round, lineJoin: .round)
+                        let nut = CGPoint(x: route.nut.x * w, y: route.nut.y * h)
+                        var neckString = Path()
+                        neckString.move(to: CGPoint(x: route.nut.x * w, y: h))
+                        neckString.addLine(to: nut)
+                        context.stroke(neckString, with: .color(selected ? .mint : Color(red: 0.79, green: 0.77, blue: 0.66)), style: style)
+                        var headString = Path()
+                        headString.move(to: nut)
+                        headString.addLine(to: CGPoint(x: route.post.x * w, y: route.post.y * h))
+                        let ink = colorScheme == .dark ? Color(red: 0.79, green: 0.77, blue: 0.66) : Color(red: 0.34, green: 0.29, blue: 0.23)
+                        context.stroke(headString, with: .color(selected ? (colorScheme == .dark ? .mint : .instrumentAccent) : ink), style: style)
                     }
                 }
                 ForEach(HeadstockStringRoute.all, id: \.string) { route in
@@ -369,7 +293,7 @@ private struct GuitarHeadstock: View {
                 }
                 Text("muttan")
                     .font(.system(size: max(9, w * 0.048), weight: .medium, design: .serif))
-                    .foregroundStyle(Color(red: 0.85, green: 0.75, blue: 0.54))
+                    .foregroundStyle(colorScheme == .dark ? Color(red: 0.85, green: 0.75, blue: 0.54) : Color(red: 0.36, green: 0.25, blue: 0.13))
                     .position(x: w / 2, y: h * 0.115)
             }
         }
@@ -418,6 +342,7 @@ private final class GuitarTuner: ObservableObject {
     @Published private(set) var isListening = false
     @Published private(set) var isStarting = false
     @Published private(set) var statusMessage: String?
+    @Published private(set) var permissionDenied = false
 
     private let engine = AVAudioEngine()
     private let analysisQueue = DispatchQueue(label: "com.muttan.pitch-analysis", qos: .userInitiated)
@@ -434,6 +359,7 @@ private final class GuitarTuner: ObservableObject {
             return
         }
         isStarting = true
+        permissionDenied = false
         startAttempt += 1
         let attempt = startAttempt
         statusMessage = nil
@@ -448,6 +374,7 @@ private final class GuitarTuner: ObservableObject {
                 DebugLog.record("tuner.microphone.permission", details: ["granted": String(granted)])
                 guard granted else {
                     self.isStarting = false
+                    self.permissionDenied = true
                     self.statusMessage = "설정에서 마이크 접근을 허용해 주세요."
                     return
                 }

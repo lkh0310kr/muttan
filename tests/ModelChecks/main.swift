@@ -108,3 +108,7 @@ for i in 0..<routes.count {
     }
 }
 print("Headstock routing checks passed: six posts, ordered nut slots and no crossed strings.")
+
+check(TunerPitchReading(midi: 40).pitchClassName == "E", "Plain low E label")
+check(TunerPitchReading(midi: 64).pitchClassName == "E", "Plain high E label")
+check(TunerPitchReading(midi: 42).pitchClassName == "F♯", "Accidental remains visible without octave")

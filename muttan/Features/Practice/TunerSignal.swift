@@ -50,10 +50,13 @@ extension GuitarTuning {
 struct TunerPitchReading {
     let midi: Double
     var frequency: Double { 440 * pow(2, (midi - 69) / 12) }
-    var noteName: String {
+    var pitchClassName: String {
         let note = Int(midi.rounded())
         let names = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-        return "\(names[(note % 12 + 12) % 12])\(note / 12 - 1)"
+        return names[(note % 12 + 12) % 12]
+    }
+    var noteName: String {
+        "\(pitchClassName)\(Int(midi.rounded()) / 12 - 1)"
     }
 }
 
