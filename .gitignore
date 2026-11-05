@@ -1,5 +1,6 @@
 .workspace/
 xcuserdata/
 *.xcuserstate
+.DS_Store
 .derivedData/
 artifacts/ui-screenshots/
