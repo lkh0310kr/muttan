@@ -90,11 +90,7 @@ struct TunerView: View {
         }
     }
 
-    private var screenBackground: Color {
-        colorScheme == .dark
-            ? Color(red: 0.075, green: 0.08, blue: 0.095)
-            : Color(uiColor: .systemBackground)
-    }
+    private var screenBackground: Color { .tunerSurface }
 
     private var tuningHeader: some View {
         HStack {
@@ -129,7 +125,6 @@ struct TunerView: View {
 }
 
 private struct TuningPitchGraph: View {
-    @Environment(\.colorScheme) private var colorScheme
     let noteName: String?
     let cents: Double?
     let feedback: String
@@ -139,7 +134,8 @@ private struct TuningPitchGraph: View {
         GeometryReader { geometry in
             let center = geometry.size.width / 2
             let normalized = CGFloat(max(-50, min(50, cents ?? 0)) / 50)
-            let axisY = geometry.size.height * 0.45
+            let axisY = geometry.size.height * 0.34
+            let markerX = isInTune ? center : center + normalized * (center - 42)
             ZStack {
                 Canvas { context, size in
                     var ticks = Path()
@@ -151,32 +147,41 @@ private struct TuningPitchGraph: View {
                         ticks.move(to: CGPoint(x: x, y: axisY - length))
                         ticks.addLine(to: CGPoint(x: x, y: axisY + length))
                     }
-                    context.stroke(ticks, with: .color(Color.primary.opacity(0.15)), lineWidth: 1)
+                    context.stroke(ticks, with: .color(Color.primary.opacity(0.13)), lineWidth: 1)
                     var reference = Path()
-                    reference.move(to: CGPoint(x: center, y: axisY - 16))
-                    reference.addLine(to: CGPoint(x: center, y: axisY + 16))
-                    context.stroke(reference, with: .color(.instrumentAccent.opacity(0.6)), lineWidth: 1.5)
+                    reference.move(to: CGPoint(x: center, y: 4))
+                    reference.addLine(to: CGPoint(x: center, y: size.height - 4))
+                    context.stroke(reference, with: .color(isInTune ? Color.instrumentAccent.opacity(0.65) : Color.primary.opacity(0.16)), lineWidth: 1.5)
                 }
                 HStack { Text("♭"); Spacer(); Text("♯") }
                     .font(.title2).foregroundStyle(.secondary)
                     .position(x: center, y: axisY)
-                Text(noteName ?? "—")
-                    .font(.system(size: 44, weight: .medium, design: .rounded))
-                    .foregroundStyle(isInTune ? Color.instrumentAccent : Color.primary)
-                    .frame(width: 72, height: 72)
-                    .background(colorScheme == .dark ? Color(red: 0.075, green: 0.08, blue: 0.095) : Color(uiColor: .systemBackground))
-                    .position(x: center + normalized * (center - 42), y: axisY)
+                Circle()
+                    .fill(Color.tunerSurface)
+                    .overlay(Circle().stroke(isInTune ? Color.instrumentAccent : Color.secondary, lineWidth: 2.5))
+                    .overlay {
+                        if isInTune {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 22, weight: .semibold))
+                                .foregroundStyle(Color.instrumentAccent)
+                        }
+                    }
+                    .frame(width: 48, height: 48)
+                    .position(x: markerX, y: axisY)
                     .animation(.snappy(duration: 0.16), value: cents)
-                if isInTune {
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 22, weight: .semibold))
-                        .foregroundStyle(Color.instrumentAccent)
-                        .position(x: center, y: geometry.size.height * 0.86)
-                        .accessibilityHidden(true)
-                } else if cents == nil {
-                    Text(noteName == nil ? "줄을 튕겨 주세요" : "개방현을 연주하세요").font(.footnote).foregroundStyle(.secondary)
-                        .position(x: center, y: geometry.size.height * 0.86)
+                Group {
+                    if let noteName {
+                        Text(noteName)
+                            .font(.system(size: 32, weight: .medium, design: .rounded))
+                            .foregroundStyle(isInTune ? Color.instrumentAccent : Color.primary)
+                            .frame(width: 56, height: 50)
+                    } else {
+                        Text("줄을 튕겨 주세요").font(.footnote).foregroundStyle(.secondary)
+                            .padding(.horizontal, 12).frame(height: 40)
+                    }
                 }
+                .background(Color.tunerSurface)
+                .position(x: center, y: geometry.size.height * 0.76)
             }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("\(noteName ?? "감지된 음 없음"). \(feedback)")
@@ -247,10 +252,10 @@ private struct GuitarHeadstock: View {
                         .position(x: w * (left ? 0.06 : 0.94), y: h * route.post.y)
                 }
                 HeadstockShape()
-                    .fill(LinearGradient(colors: colorScheme == .dark ? [Color(red: 0.28, green: 0.18, blue: 0.12), Color(red: 0.19, green: 0.12, blue: 0.085)] : [Color(red: 0.88, green: 0.75, blue: 0.57), Color(red: 0.79, green: 0.64, blue: 0.45)], startPoint: .leading, endPoint: .trailing))
-                    .overlay(HeadstockShape().stroke(Color(red: 0.65, green: 0.48, blue: 0.32), lineWidth: 1.2))
+                    .fill(LinearGradient(colors: colorScheme == .dark ? [Color(red: 0.28, green: 0.18, blue: 0.12), Color(red: 0.19, green: 0.12, blue: 0.085)] : [Color(red: 0.83, green: 0.80, blue: 0.74), Color(red: 0.75, green: 0.71, blue: 0.64)], startPoint: .leading, endPoint: .trailing))
+                    .overlay(HeadstockShape().stroke(colorScheme == .dark ? Color(red: 0.65, green: 0.48, blue: 0.32) : Color(red: 0.59, green: 0.55, blue: 0.48), lineWidth: 1.2))
                 Rectangle()
-                    .fill(Color(red: 0.12, green: 0.105, blue: 0.09))
+                    .fill(colorScheme == .dark ? Color(red: 0.12, green: 0.105, blue: 0.09) : Color(red: 0.43, green: 0.40, blue: 0.35))
                     .frame(width: w * 0.34, height: h * 0.16)
                     .position(x: w / 2, y: h * 0.92)
                 Canvas { context, _ in
@@ -293,7 +298,7 @@ private struct GuitarHeadstock: View {
                 }
                 Text("muttan")
                     .font(.system(size: max(9, w * 0.048), weight: .medium, design: .serif))
-                    .foregroundStyle(colorScheme == .dark ? Color(red: 0.85, green: 0.75, blue: 0.54) : Color(red: 0.36, green: 0.25, blue: 0.13))
+                    .foregroundStyle(colorScheme == .dark ? Color(red: 0.85, green: 0.75, blue: 0.54) : Color(red: 0.34, green: 0.31, blue: 0.26))
                     .position(x: w / 2, y: h * 0.115)
             }
         }
