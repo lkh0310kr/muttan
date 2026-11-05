@@ -12,7 +12,7 @@ muttan은 코드 사전과 기타 튜너를 구현했고, 다음은 `연습`과 
 
 첫 시제품의 목표는 한 현에서 0·1·2·3프렛을 순서대로 연습하는 것이다. 전체 곡, 화음 인식, 연습 기록·점수는 이번 기술 조사 범위가 아니다.
 
-서비스별 제품 조사는 [타 서비스 색인](services.md)과 [비교 문서](synthesis.md)에서 확인한다. [Simply Guitar](simply-guitar/README.md), [Yousician](yousician/README.md), [Fender Play](fender-play/README.md), [Justin Guitar](justinguitar/README.md), [Ultimate Guitar](ultimate-guitar/README.md), [Guitar Tricks](guitar-tricks/README.md). 이 문서는 기술 선택과 검증 순서를 계획한다.
+타 서비스별 UI·UX·기술·커리큘럼·기능 조사와 종합 비교는 [타 서비스 조사 폴더](other-services/README.md)에 분리했다.
 
 ## 기술 지도
 
@@ -95,7 +95,7 @@ muttan은 코드 사전과 기타 튜너를 구현했고, 다음은 `연습`과 
 - Apple, [`setPreferredIOBufferDuration`](https://developer.apple.com/documentation/avfaudio/avaudiosession/setpreferrediobufferduration%28_%3A%29): 버퍼 설정 API. 요청값이 기기에서 그대로 적용된다고 가정하지 않고 실기기에서 측정한다.
 - de Cheveigné & Kawahara, [“YIN, a fundamental frequency estimator for speech and music”](https://pubmed.ncbi.nlm.nih.gov/12002874/), 2002: 단음 F0 대안의 기준 논문.
 - [Musical note onset detection based on a spectral sparsity measure](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550344/): 온셋 검출 배경과 현악기 onset 연구. 앱 채택 전 낮은 복잡도의 단순 baseline과 비교한다.
-- Fender·Simply·Yousician 등 제품 조사에서 확인된 실사용 패턴은 [서비스별 기술 문서](simply-guitar/02-technology.md), [Yousician](yousician/02-technology.md), [Fender Play](fender-play/02-technology.md), [Justin Guitar](justinguitar/02-technology.md), [Ultimate Guitar](ultimate-guitar/02-technology.md), [Guitar Tricks](guitar-tricks/02-technology.md) 및 [종합 UX 비교](synthesis.md)를 참고하되, 경쟁사 내부 알고리즘으로 오인하지 않는다.
+- Fender·Simply·Yousician 등 제품 조사에서 확인된 실사용 패턴은 [서비스별 기술 문서](other-services/simply-guitar/02-technology.md), [Yousician](other-services/yousician/02-technology.md), [Fender Play](other-services/fender-play/02-technology.md), [Justin Guitar](other-services/justinguitar/02-technology.md), [Ultimate Guitar](other-services/ultimate-guitar/02-technology.md), [Guitar Tricks](other-services/guitar-tricks/02-technology.md) 및 [종합 UX 비교](other-services/synthesis.md)를 참고하되, 경쟁사 내부 알고리즘으로 오인하지 않는다.
 
 ## 비범위·주의
 
