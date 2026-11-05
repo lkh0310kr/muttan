@@ -63,6 +63,1155 @@
     ]
   },
   {
+    "id": "Cm",
+    "symbol": "Cm",
+    "root": 0,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Cm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          5,
+          4,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C7",
+    "symbol": "C7",
+    "root": 0,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "C7-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          2,
+          3,
+          1,
+          0
+        ],
+        "fingers": [
+          null,
+          3,
+          2,
+          4,
+          1,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "C7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          3,
+          5,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cmaj7",
+    "symbol": "Cmaj7",
+    "root": 0,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Cmaj7-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          2,
+          0,
+          0,
+          0
+        ],
+        "fingers": [
+          null,
+          3,
+          2,
+          0,
+          0,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Cmaj7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          4,
+          5,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cm7",
+    "symbol": "Cm7",
+    "root": 0,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Cm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          3,
+          4,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Csus2",
+    "symbol": "Csus2",
+    "root": 0,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Csus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          5,
+          3,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Csus4",
+    "symbol": "Csus4",
+    "root": 0,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Csus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          5,
+          6,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 5,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C6",
+    "symbol": "C6",
+    "root": 0,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "C6-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          2,
+          2,
+          1,
+          3
+        ],
+        "fingers": [
+          null,
+          3,
+          2,
+          2,
+          1,
+          4
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 2
+          }
+        ]
+      },
+      {
+        "id": "C6-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          5,
+          5,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cm6",
+    "symbol": "Cm6",
+    "root": 0,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Cm6-0",
+        "title": "기본 운지",
+        "frets": [
+          8,
+          10,
+          10,
+          8,
+          10,
+          8
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cadd9",
+    "symbol": "Cadd9",
+    "root": 0,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Cadd9-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          2,
+          0,
+          3,
+          3
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          0,
+          3,
+          4
+        ],
+        "barres": []
+      },
+      {
+        "id": "Cadd9-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          3,
+          5,
+          7,
+          5,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 5,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C9",
+    "symbol": "C9",
+    "root": 0,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "C9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          2,
+          3,
+          3,
+          3
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cdim",
+    "symbol": "Cdim",
+    "root": 0,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Cdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          10,
+          11,
+          13,
+          11
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Cdim7",
+    "symbol": "Cdim7",
+    "root": 0,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Cdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          4,
+          2,
+          4,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Cm7b5",
+    "symbol": "Cm7♭5",
+    "root": 0,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Cm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          4,
+          3,
+          4,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Caug",
+    "symbol": "Caug",
+    "root": 0,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Caug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          3,
+          6,
+          5,
+          5,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Db",
+    "symbol": "C♯",
+    "root": 1,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "Db-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          6,
+          6,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 6,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbm",
+    "symbol": "C♯m",
+    "root": 1,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Dbm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          6,
+          5,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Db7",
+    "symbol": "C♯7",
+    "root": 1,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "Db7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          4,
+          6,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbmaj7",
+    "symbol": "C♯maj7",
+    "root": 1,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Dbmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          5,
+          6,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbm7",
+    "symbol": "C♯m7",
+    "root": 1,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Dbm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          4,
+          5,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbsus2",
+    "symbol": "C♯sus2",
+    "root": 1,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Dbsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          6,
+          4,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbsus4",
+    "symbol": "C♯sus4",
+    "root": 1,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Dbsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          6,
+          7,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 6,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Db6",
+    "symbol": "C♯6",
+    "root": 1,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "Db6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          6,
+          6,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbm6",
+    "symbol": "C♯m6",
+    "root": 1,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Dbm6-0",
+        "title": "기본 운지",
+        "frets": [
+          9,
+          11,
+          11,
+          9,
+          11,
+          9
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbadd9",
+    "symbol": "C♯add9",
+    "root": 1,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Dbadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          6,
+          8,
+          6,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 6,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Db9",
+    "symbol": "C♯9",
+    "root": 1,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "Db9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          3,
+          4,
+          4,
+          4
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbdim",
+    "symbol": "C♯dim",
+    "root": 1,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Dbdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          11,
+          12,
+          14,
+          12
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dbdim7",
+    "symbol": "C♯dim7",
+    "root": 1,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Dbdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          5,
+          3,
+          5,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Dbm7b5",
+    "symbol": "C♯m7♭5",
+    "root": 1,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Dbm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          5,
+          4,
+          5,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Dbaug",
+    "symbol": "C♯aug",
+    "root": 1,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Dbaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          4,
+          7,
+          6,
+          6,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "D",
     "symbol": "D",
     "root": 2,
@@ -126,6 +1275,1204 @@
     ]
   },
   {
+    "id": "Dm",
+    "symbol": "Dm",
+    "root": 2,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Dm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          3,
+          1
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          2,
+          3,
+          1
+        ],
+        "barres": []
+      },
+      {
+        "id": "Dm-1",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          7,
+          6,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D7",
+    "symbol": "D7",
+    "root": 2,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "D7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          1,
+          2
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          2,
+          1,
+          3
+        ],
+        "barres": []
+      },
+      {
+        "id": "D7-1",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          5,
+          7,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dmaj7",
+    "symbol": "Dmaj7",
+    "root": 2,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Dmaj7-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          2,
+          2
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          1,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      },
+      {
+        "id": "Dmaj7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          6,
+          7,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dm7",
+    "symbol": "Dm7",
+    "root": 2,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Dm7-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          1,
+          1
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          2,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 2,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      },
+      {
+        "id": "Dm7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          5,
+          6,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dsus2",
+    "symbol": "Dsus2",
+    "root": 2,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Dsus2-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          3,
+          0
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          1,
+          3,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Dsus2-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          7,
+          5,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dsus4",
+    "symbol": "Dsus4",
+    "root": 2,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Dsus4-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          0,
+          2,
+          3,
+          3
+        ],
+        "fingers": [
+          null,
+          null,
+          0,
+          1,
+          3,
+          4
+        ],
+        "barres": []
+      },
+      {
+        "id": "Dsus4-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          7,
+          8,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 7,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D6",
+    "symbol": "D6",
+    "root": 2,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "D6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          7,
+          7,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dm6",
+    "symbol": "Dm6",
+    "root": 2,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Dm6-0",
+        "title": "기본 운지",
+        "frets": [
+          10,
+          12,
+          12,
+          10,
+          12,
+          10
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 12,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Dadd9",
+    "symbol": "Dadd9",
+    "root": 2,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Dadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          7,
+          9,
+          7,
+          5
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 7,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D9",
+    "symbol": "D9",
+    "root": 2,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "D9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          4,
+          5,
+          5,
+          5
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ddim",
+    "symbol": "Ddim",
+    "root": 2,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Ddim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          12,
+          13,
+          15,
+          13
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 13,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ddim7",
+    "symbol": "Ddim7",
+    "root": 2,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Ddim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          6,
+          4,
+          6,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Dm7b5",
+    "symbol": "Dm7♭5",
+    "root": 2,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Dm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          6,
+          5,
+          6,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Daug",
+    "symbol": "Daug",
+    "root": 2,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Daug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          5,
+          8,
+          7,
+          7,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Eb",
+    "symbol": "E♭",
+    "root": 3,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "Eb-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          8,
+          8,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 8,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebm",
+    "symbol": "E♭m",
+    "root": 3,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Ebm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          8,
+          7,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Eb7",
+    "symbol": "E♭7",
+    "root": 3,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "Eb7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          6,
+          8,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebmaj7",
+    "symbol": "E♭maj7",
+    "root": 3,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Ebmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          7,
+          8,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebm7",
+    "symbol": "E♭m7",
+    "root": 3,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Ebm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          6,
+          7,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebsus2",
+    "symbol": "E♭sus2",
+    "root": 3,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Ebsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          8,
+          6,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebsus4",
+    "symbol": "E♭sus4",
+    "root": 3,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Ebsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          8,
+          9,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 8,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Eb6",
+    "symbol": "E♭6",
+    "root": 3,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "Eb6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          8,
+          8,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebm6",
+    "symbol": "E♭m6",
+    "root": 3,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Ebm6-0",
+        "title": "기본 운지",
+        "frets": [
+          11,
+          13,
+          13,
+          11,
+          13,
+          11
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 13,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebadd9",
+    "symbol": "E♭add9",
+    "root": 3,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Ebadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          8,
+          10,
+          8,
+          6
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 8,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Eb9",
+    "symbol": "E♭9",
+    "root": 3,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "Eb9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          5,
+          6,
+          6,
+          6
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebdim",
+    "symbol": "E♭dim",
+    "root": 3,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Ebdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ebdim7",
+    "symbol": "E♭dim7",
+    "root": 3,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Ebdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          7,
+          5,
+          7,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Ebm7b5",
+    "symbol": "E♭m7♭5",
+    "root": 3,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Ebm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          7,
+          6,
+          7,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Ebaug",
+    "symbol": "E♭aug",
+    "root": 3,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Ebaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          6,
+          9,
+          8,
+          8,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "E",
     "symbol": "E",
     "root": 4,
@@ -183,6 +2530,640 @@
             "fromString": 4,
             "toString": 2,
             "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Em",
+    "symbol": "Em",
+    "root": 4,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Em-0",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          2,
+          0,
+          0,
+          0
+        ],
+        "fingers": [
+          0,
+          2,
+          3,
+          0,
+          0,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Em-1",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          9,
+          8,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "E7",
+    "symbol": "E7",
+    "root": 4,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "E7-open",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          0,
+          1,
+          0,
+          0
+        ],
+        "fingers": [
+          0,
+          2,
+          0,
+          1,
+          0,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "E7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          7,
+          9,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Emaj7",
+    "symbol": "Emaj7",
+    "root": 4,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Emaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          8,
+          9,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Em7",
+    "symbol": "Em7",
+    "root": 4,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Em7-open",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "fingers": [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Em7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          7,
+          8,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Esus2",
+    "symbol": "Esus2",
+    "root": 4,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Esus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          9,
+          7,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Esus4",
+    "symbol": "Esus4",
+    "root": 4,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Esus4-open",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          2,
+          2,
+          0,
+          0
+        ],
+        "fingers": [
+          0,
+          1,
+          2,
+          3,
+          0,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Esus4-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          9,
+          10,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 9,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "E6",
+    "symbol": "E6",
+    "root": 4,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "E6-open",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          2,
+          1,
+          2,
+          0
+        ],
+        "fingers": [
+          0,
+          2,
+          3,
+          1,
+          4,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "E6-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          9,
+          9,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Em6",
+    "symbol": "Em6",
+    "root": 4,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Em6-open",
+        "title": "기본 운지",
+        "frets": [
+          0,
+          2,
+          2,
+          0,
+          2,
+          0
+        ],
+        "fingers": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Em6-0",
+        "title": "대체 운지",
+        "frets": [
+          12,
+          14,
+          14,
+          12,
+          14,
+          12
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 14,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Eadd9",
+    "symbol": "Eadd9",
+    "root": 4,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Eadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          9,
+          11,
+          9,
+          7
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 9,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "E9",
+    "symbol": "E9",
+    "root": 4,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "E9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          6,
+          7,
+          7,
+          7
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Edim",
+    "symbol": "Edim",
+    "root": 4,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Edim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          2,
+          3,
+          5,
+          3
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Edim7",
+    "symbol": "Edim7",
+    "root": 4,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Edim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          8,
+          6,
+          8,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Em7b5",
+    "symbol": "Em7♭5",
+    "root": 4,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Em7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          8,
+          7,
+          8,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Eaug",
+    "symbol": "Eaug",
+    "root": 4,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Eaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          7,
+          10,
+          9,
+          9,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
           }
         ]
       }
@@ -253,6 +3234,1064 @@
     ]
   },
   {
+    "id": "Fm",
+    "symbol": "Fm",
+    "root": 5,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Fm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          10,
+          9,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F7",
+    "symbol": "F7",
+    "root": 5,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "F7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          8,
+          10,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fmaj7",
+    "symbol": "Fmaj7",
+    "root": 5,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Fmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          9,
+          10,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fm7",
+    "symbol": "Fm7",
+    "root": 5,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Fm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          8,
+          9,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fsus2",
+    "symbol": "Fsus2",
+    "root": 5,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Fsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          10,
+          8,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fsus4",
+    "symbol": "Fsus4",
+    "root": 5,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Fsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          10,
+          11,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 10,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F6",
+    "symbol": "F6",
+    "root": 5,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "F6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          10,
+          10,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fm6",
+    "symbol": "Fm6",
+    "root": 5,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Fm6-0",
+        "title": "기본 운지",
+        "frets": [
+          1,
+          3,
+          3,
+          1,
+          3,
+          1
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 3,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fadd9",
+    "symbol": "Fadd9",
+    "root": 5,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Fadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          10,
+          12,
+          10,
+          8
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 10,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F9",
+    "symbol": "F9",
+    "root": 5,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "F9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          7,
+          8,
+          8,
+          8
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fdim",
+    "symbol": "Fdim",
+    "root": 5,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Fdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          3,
+          4,
+          6,
+          4
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Fdim7",
+    "symbol": "Fdim7",
+    "root": 5,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Fdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          9,
+          7,
+          9,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Fm7b5",
+    "symbol": "Fm7♭5",
+    "root": 5,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Fm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          9,
+          8,
+          9,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Faug",
+    "symbol": "Faug",
+    "root": 5,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Faug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          8,
+          11,
+          10,
+          10,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#",
+    "symbol": "F♯",
+    "root": 6,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "F#-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          11,
+          11,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 11,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#m",
+    "symbol": "F♯m",
+    "root": 6,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "F#m-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          11,
+          10,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#7",
+    "symbol": "F♯7",
+    "root": 6,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "F#7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          9,
+          11,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#maj7",
+    "symbol": "F♯maj7",
+    "root": 6,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "F#maj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          10,
+          11,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#m7",
+    "symbol": "F♯m7",
+    "root": 6,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "F#m7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          9,
+          10,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#sus2",
+    "symbol": "F♯sus2",
+    "root": 6,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "F#sus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          11,
+          9,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#sus4",
+    "symbol": "F♯sus4",
+    "root": 6,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "F#sus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          11,
+          12,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 11,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#6",
+    "symbol": "F♯6",
+    "root": 6,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "F#6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          11,
+          11,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#m6",
+    "symbol": "F♯m6",
+    "root": 6,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "F#m6-0",
+        "title": "기본 운지",
+        "frets": [
+          2,
+          4,
+          4,
+          2,
+          4,
+          2
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 4,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#add9",
+    "symbol": "F♯add9",
+    "root": 6,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "F#add9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          11,
+          13,
+          11,
+          9
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 11,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#9",
+    "symbol": "F♯9",
+    "root": 6,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "F#9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          8,
+          9,
+          9,
+          9
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#dim",
+    "symbol": "F♯dim",
+    "root": 6,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "F#dim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          4,
+          5,
+          7,
+          5
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "F#dim7",
+    "symbol": "F♯dim7",
+    "root": 6,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "F#dim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          10,
+          8,
+          10,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "F#m7b5",
+    "symbol": "F♯m7♭5",
+    "root": 6,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "F#m7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          10,
+          9,
+          10,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "F#aug",
+    "symbol": "F♯aug",
+    "root": 6,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "F#aug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          9,
+          12,
+          11,
+          11,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "G",
     "symbol": "G",
     "root": 7,
@@ -304,6 +4343,1085 @@
             "fromString": 6,
             "toString": 1,
             "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gm",
+    "symbol": "Gm",
+    "root": 7,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Gm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          12,
+          11,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "G7",
+    "symbol": "G7",
+    "root": 7,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "G7-open",
+        "title": "기본 운지",
+        "frets": [
+          3,
+          2,
+          0,
+          0,
+          0,
+          1
+        ],
+        "fingers": [
+          3,
+          2,
+          0,
+          0,
+          0,
+          1
+        ],
+        "barres": []
+      },
+      {
+        "id": "G7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          10,
+          12,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gmaj7",
+    "symbol": "Gmaj7",
+    "root": 7,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Gmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          11,
+          12,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gm7",
+    "symbol": "Gm7",
+    "root": 7,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Gm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          10,
+          11,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gsus2",
+    "symbol": "Gsus2",
+    "root": 7,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Gsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          12,
+          10,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gsus4",
+    "symbol": "Gsus4",
+    "root": 7,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Gsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          12,
+          13,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 12,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "G6",
+    "symbol": "G6",
+    "root": 7,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "G6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          12,
+          12,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gm6",
+    "symbol": "Gm6",
+    "root": 7,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Gm6-0",
+        "title": "기본 운지",
+        "frets": [
+          3,
+          5,
+          5,
+          3,
+          5,
+          3
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 5,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gadd9",
+    "symbol": "Gadd9",
+    "root": 7,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Gadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          12,
+          14,
+          12,
+          10
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 12,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "G9",
+    "symbol": "G9",
+    "root": 7,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "G9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          9,
+          10,
+          10,
+          10
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gdim",
+    "symbol": "Gdim",
+    "root": 7,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Gdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          5,
+          6,
+          8,
+          6
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Gdim7",
+    "symbol": "Gdim7",
+    "root": 7,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Gdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          11,
+          9,
+          11,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Gm7b5",
+    "symbol": "Gm7♭5",
+    "root": 7,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Gm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          11,
+          10,
+          11,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Gaug",
+    "symbol": "Gaug",
+    "root": 7,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Gaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          10,
+          13,
+          12,
+          12,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ab",
+    "symbol": "A♭",
+    "root": 8,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "Ab-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          13,
+          13,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 13,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abm",
+    "symbol": "A♭m",
+    "root": 8,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Abm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          13,
+          12,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ab7",
+    "symbol": "A♭7",
+    "root": 8,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "Ab7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          11,
+          13,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abmaj7",
+    "symbol": "A♭maj7",
+    "root": 8,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Abmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          12,
+          13,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abm7",
+    "symbol": "A♭m7",
+    "root": 8,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Abm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          11,
+          12,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Absus2",
+    "symbol": "A♭sus2",
+    "root": 8,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Absus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          13,
+          11,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Absus4",
+    "symbol": "A♭sus4",
+    "root": 8,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Absus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          13,
+          14,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 13,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ab6",
+    "symbol": "A♭6",
+    "root": 8,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "Ab6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          13,
+          13,
+          13
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 13,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abm6",
+    "symbol": "A♭m6",
+    "root": 8,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Abm6-0",
+        "title": "기본 운지",
+        "frets": [
+          4,
+          6,
+          6,
+          4,
+          6,
+          4
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 6,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abadd9",
+    "symbol": "A♭add9",
+    "root": 8,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Abadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          13,
+          15,
+          13,
+          11
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 13,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Ab9",
+    "symbol": "A♭9",
+    "root": 8,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "Ab9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          10,
+          11,
+          11,
+          11
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 11,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abdim",
+    "symbol": "A♭dim",
+    "root": 8,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Abdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          6,
+          7,
+          9,
+          7
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Abdim7",
+    "symbol": "A♭dim7",
+    "root": 8,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Abdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          12,
+          10,
+          12,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Abm7b5",
+    "symbol": "A♭m7♭5",
+    "root": 8,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Abm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          12,
+          11,
+          12,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Abaug",
+    "symbol": "A♭aug",
+    "root": 8,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Abaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          11,
+          14,
+          13,
+          13,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 13,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
           }
         ]
       }
@@ -424,54 +5542,111 @@
     ]
   },
   {
-    "id": "Dm",
-    "symbol": "Dm",
-    "root": 2,
-    "quality": "minor",
+    "id": "A7",
+    "symbol": "A7",
+    "root": 9,
+    "quality": "dominant7",
     "voicings": [
       {
-        "id": "Dm-0",
+        "id": "A7-0",
         "title": "기본 운지",
         "frets": [
           null,
-          null,
           0,
           2,
-          3,
-          1
+          0,
+          2,
+          0
         ],
         "fingers": [
           null,
-          null,
           0,
           2,
+          0,
           3,
-          1
+          0
         ],
         "barres": []
       },
       {
-        "id": "Dm-1",
+        "id": "A7-1",
         "title": "대체 운지",
         "frets": [
-          null,
           5,
           7,
-          7,
+          5,
           6,
+          5,
           5
         ],
         "fingers": [
-          null,
           1,
           3,
-          4,
+          1,
           2,
+          1,
           1
         ],
         "barres": [
           {
             "fret": 5,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Amaj7",
+    "symbol": "Amaj7",
+    "root": 9,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Amaj7-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          0,
+          2,
+          1,
+          2,
+          0
+        ],
+        "fingers": [
+          null,
+          0,
+          2,
+          1,
+          3,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Amaj7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          12,
+          14,
+          13,
+          14,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
             "fromString": 5,
             "toString": 1,
             "finger": 1
@@ -481,42 +5656,575 @@
     ]
   },
   {
-    "id": "Em",
-    "symbol": "Em",
-    "root": 4,
-    "quality": "minor",
+    "id": "Am7",
+    "symbol": "Am7",
+    "root": 9,
+    "quality": "minor7",
     "voicings": [
       {
-        "id": "Em-0",
+        "id": "Am7-open",
         "title": "기본 운지",
         "frets": [
+          null,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        "fingers": [
+          null,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Am7-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          12,
+          14,
+          12,
+          13,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Asus2",
+    "symbol": "Asus2",
+    "root": 9,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Asus2-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
           0,
           2,
           2,
-          0,
           0,
           0
         ],
         "fingers": [
+          null,
           0,
+          1,
           2,
-          3,
-          0,
           0,
           0
         ],
         "barres": []
       },
       {
-        "id": "Em-1",
+        "id": "Asus2-0",
         "title": "대체 운지",
         "frets": [
           null,
+          12,
+          14,
+          14,
+          12,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Asus4",
+    "symbol": "Asus4",
+    "root": 9,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Asus4-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          0,
+          2,
+          2,
+          3,
+          0
+        ],
+        "fingers": [
+          null,
+          0,
+          1,
+          2,
+          3,
+          0
+        ],
+        "barres": []
+      },
+      {
+        "id": "Asus4-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          12,
+          14,
+          14,
+          15,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 14,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "A6",
+    "symbol": "A6",
+    "root": 9,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "A6-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          0,
+          2,
+          2,
+          2,
+          2
+        ],
+        "fingers": [
+          null,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      },
+      {
+        "id": "A6-0",
+        "title": "대체 운지",
+        "frets": [
+          null,
+          12,
+          14,
+          14,
+          14,
+          14
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 14,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Am6",
+    "symbol": "Am6",
+    "root": 9,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Am6-open",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          0,
+          2,
+          2,
+          1,
+          2
+        ],
+        "fingers": [
+          null,
+          0,
+          2,
+          3,
+          1,
+          4
+        ],
+        "barres": []
+      },
+      {
+        "id": "Am6-0",
+        "title": "대체 운지",
+        "frets": [
+          5,
           7,
-          9,
-          9,
+          7,
+          5,
+          7,
+          5
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 5,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 7,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Aadd9",
+    "symbol": "Aadd9",
+    "root": 9,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Aadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          12,
+          14,
+          16,
+          14,
+          12
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 14,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "A9",
+    "symbol": "A9",
+    "root": 9,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "A9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          12,
+          11,
+          12,
+          12,
+          12
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 12,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Adim",
+    "symbol": "Adim",
+    "root": 9,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Adim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          7,
           8,
-          7
+          10,
+          8
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 8,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Adim7",
+    "symbol": "Adim7",
+    "root": 9,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Adim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          12,
+          13,
+          11,
+          13,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Am7b5",
+    "symbol": "Am7♭5",
+    "root": 9,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Am7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          12,
+          13,
+          12,
+          13,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Aaug",
+    "symbol": "Aaug",
+    "root": 9,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Aaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          12,
+          15,
+          14,
+          14,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 14,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bb",
+    "symbol": "B♭",
+    "root": 10,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "Bb-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 3,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbm",
+    "symbol": "B♭m",
+    "root": 10,
+    "quality": "minor",
+    "voicings": [
+      {
+        "id": "Bbm-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          3,
+          2,
+          1
         ],
         "fingers": [
           null,
@@ -528,10 +6236,524 @@
         ],
         "barres": [
           {
-            "fret": 7,
+            "fret": 1,
             "fromString": 5,
             "toString": 1,
             "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bb7",
+    "symbol": "B♭7",
+    "root": 10,
+    "quality": "dominant7",
+    "voicings": [
+      {
+        "id": "Bb7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          1,
+          3,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbmaj7",
+    "symbol": "B♭maj7",
+    "root": 10,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Bbmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          2,
+          3,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbm7",
+    "symbol": "B♭m7",
+    "root": 10,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Bbm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbsus2",
+    "symbol": "B♭sus2",
+    "root": 10,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Bbsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          3,
+          1,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbsus4",
+    "symbol": "B♭sus4",
+    "root": 10,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Bbsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 3,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bb6",
+    "symbol": "B♭6",
+    "root": 10,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "Bb6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbm6",
+    "symbol": "B♭m6",
+    "root": 10,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Bbm6-0",
+        "title": "기본 운지",
+        "frets": [
+          6,
+          8,
+          8,
+          6,
+          8,
+          6
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 6,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 8,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbadd9",
+    "symbol": "B♭add9",
+    "root": 10,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Bbadd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          3,
+          5,
+          3,
+          1
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 1,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 3,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bb9",
+    "symbol": "B♭9",
+    "root": 10,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "Bb9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          13,
+          12,
+          13,
+          13,
+          13
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 13,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbdim",
+    "symbol": "B♭dim",
+    "root": 10,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Bbdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          8,
+          9,
+          11,
+          9
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 9,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bbdim7",
+    "symbol": "B♭dim7",
+    "root": 10,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Bbdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          13,
+          14,
+          12,
+          14,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Bbm7b5",
+    "symbol": "B♭m7♭5",
+    "root": 10,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Bbm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          2,
+          1,
+          2,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Bbaug",
+    "symbol": "B♭aug",
+    "root": 10,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Bbaug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          1,
+          4,
+          3,
+          3,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 3,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "B",
+    "symbol": "B",
+    "root": 11,
+    "quality": "major",
+    "voicings": [
+      {
+        "id": "B-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          4,
+          4,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 4,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 3
           }
         ]
       }
@@ -602,99 +6824,42 @@
     ]
   },
   {
-    "id": "A7",
-    "symbol": "A7",
-    "root": 9,
+    "id": "B7",
+    "symbol": "B7",
+    "root": 11,
     "quality": "dominant7",
     "voicings": [
       {
-        "id": "A7-0",
+        "id": "B7-open",
         "title": "기본 운지",
         "frets": [
           null,
-          0,
-          2,
-          0,
-          2,
-          0
-        ],
-        "fingers": [
-          null,
-          0,
-          2,
-          0,
-          3,
-          0
-        ],
-        "barres": []
-      },
-      {
-        "id": "A7-1",
-        "title": "대체 운지",
-        "frets": [
-          5,
-          7,
-          5,
-          6,
-          5,
-          5
-        ],
-        "fingers": [
-          1,
-          3,
-          1,
           2,
           1,
-          1
-        ],
-        "barres": [
-          {
-            "fret": 5,
-            "fromString": 6,
-            "toString": 1,
-            "finger": 1
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "D7",
-    "symbol": "D7",
-    "root": 2,
-    "quality": "dominant7",
-    "voicings": [
-      {
-        "id": "D7-0",
-        "title": "기본 운지",
-        "frets": [
-          null,
-          null,
-          0,
           2,
-          1,
+          0,
           2
         ],
         "fingers": [
           null,
-          null,
-          0,
           2,
           1,
-          3
+          3,
+          0,
+          4
         ],
         "barres": []
       },
       {
-        "id": "D7-1",
+        "id": "B7-0",
         "title": "대체 운지",
         "frets": [
           null,
-          5,
-          7,
-          5,
-          7,
-          5
+          2,
+          4,
+          2,
+          4,
+          2
         ],
         "fingers": [
           null,
@@ -706,10 +6871,446 @@
         ],
         "barres": [
           {
-            "fret": 5,
+            "fret": 2,
             "fromString": 5,
             "toString": 1,
             "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bmaj7",
+    "symbol": "Bmaj7",
+    "root": 11,
+    "quality": "major7",
+    "voicings": [
+      {
+        "id": "Bmaj7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          3,
+          4,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bm7",
+    "symbol": "Bm7",
+    "root": 11,
+    "quality": "minor7",
+    "voicings": [
+      {
+        "id": "Bm7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          2,
+          3,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          1,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bsus2",
+    "symbol": "Bsus2",
+    "root": 11,
+    "quality": "sus2",
+    "voicings": [
+      {
+        "id": "Bsus2-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          4,
+          2,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          4,
+          1,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bsus4",
+    "symbol": "Bsus4",
+    "root": 11,
+    "quality": "sus4",
+    "voicings": [
+      {
+        "id": "Bsus4-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          4,
+          5,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 4,
+            "fromString": 4,
+            "toString": 3,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "B6",
+    "symbol": "B6",
+    "root": 11,
+    "quality": "major6",
+    "voicings": [
+      {
+        "id": "B6-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          4,
+          4,
+          4
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 4,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bm6",
+    "symbol": "Bm6",
+    "root": 11,
+    "quality": "minor6",
+    "voicings": [
+      {
+        "id": "Bm6-0",
+        "title": "기본 운지",
+        "frets": [
+          7,
+          9,
+          9,
+          7,
+          9,
+          7
+        ],
+        "fingers": [
+          1,
+          3,
+          3,
+          1,
+          4,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 7,
+            "fromString": 6,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 9,
+            "fromString": 5,
+            "toString": 4,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Badd9",
+    "symbol": "Badd9",
+    "root": 11,
+    "quality": "add9",
+    "voicings": [
+      {
+        "id": "Badd9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          4,
+          6,
+          4,
+          2
+        ],
+        "fingers": [
+          null,
+          1,
+          2,
+          4,
+          2,
+          1
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 5,
+            "toString": 1,
+            "finger": 1
+          },
+          {
+            "fret": 4,
+            "fromString": 4,
+            "toString": 2,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "B9",
+    "symbol": "B9",
+    "root": 11,
+    "quality": "dominant9",
+    "voicings": [
+      {
+        "id": "B9-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          1,
+          2,
+          2,
+          2
+        ],
+        "fingers": [
+          null,
+          2,
+          1,
+          3,
+          3,
+          3
+        ],
+        "barres": [
+          {
+            "fret": 2,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bdim",
+    "symbol": "Bdim",
+    "root": 11,
+    "quality": "diminished",
+    "voicings": [
+      {
+        "id": "Bdim-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          null,
+          9,
+          10,
+          12,
+          10
+        ],
+        "fingers": [
+          null,
+          null,
+          1,
+          2,
+          4,
+          2
+        ],
+        "barres": [
+          {
+            "fret": 10,
+            "fromString": 3,
+            "toString": 1,
+            "finger": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Bdim7",
+    "symbol": "Bdim7",
+    "root": 11,
+    "quality": "diminished7",
+    "voicings": [
+      {
+        "id": "Bdim7-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          3,
+          1,
+          3,
+          null
+        ],
+        "fingers": [
+          null,
+          2,
+          3,
+          1,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Bm7b5",
+    "symbol": "Bm7♭5",
+    "root": 11,
+    "quality": "halfDiminished7",
+    "voicings": [
+      {
+        "id": "Bm7b5-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          3,
+          2,
+          3,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          3,
+          2,
+          4,
+          null
+        ],
+        "barres": []
+      }
+    ]
+  },
+  {
+    "id": "Baug",
+    "symbol": "Baug",
+    "root": 11,
+    "quality": "augmented",
+    "voicings": [
+      {
+        "id": "Baug-0",
+        "title": "기본 운지",
+        "frets": [
+          null,
+          2,
+          5,
+          4,
+          4,
+          null
+        ],
+        "fingers": [
+          null,
+          1,
+          4,
+          2,
+          2,
+          null
+        ],
+        "barres": [
+          {
+            "fret": 4,
+            "fromString": 3,
+            "toString": 2,
+            "finger": 2
           }
         ]
       }

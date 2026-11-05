@@ -3,20 +3,44 @@ import Foundation
 func check(_ condition: @autoclosure () -> Bool, _ message: String) {
     precondition(condition(), message)
 }
-let chords = try JSONDecoder().decode([Chord].self, from: Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1])))
-check(chords.filter { $0.matches(query: " AM \n", quality: nil) }.map(\.symbol) == ["Am"], "Symbol search")
-check(chords.filter { $0.matches(query: "A major", quality: nil) }.map(\.symbol) == ["A"], "Full chord name")
+let chords = try ChordCatalog.decode(Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1])))
+check(chords.count == 12 * ChordQuality.allCases.count, "Complete root and quality catalog")
+for kind in ChordQuality.allCases {
+    check(Set(chords.filter { $0.quality == kind }.map(\.root)) == Set(0..<12), "Every quality covers 12 roots")
+}
+check(chords.filter { $0.matches(query: " AM \n", quality: .minor) }.map(\.symbol) == ["Am"], "Symbol search with whitespace and case")
+check(chords.filter { $0.matches(query: "A major", quality: .major) }.map(\.symbol) == ["A"], "Full chord name")
 check(chords.filter { $0.matches(query: "마이너", quality: .major) }.isEmpty, "Combined filter")
-check(chords.filter { $0.matches(query: "마이너", quality: .minor) }.count == 4, "Korean search")
-check(chords.filter { $0.matches(query: "", quality: .dominant7) }.count == 2, "Seventh filter")
+check(chords.filter { $0.matches(query: "마이너", quality: .minor) }.count == 12, "Korean search")
+check(chords.filter { $0.matches(query: "", quality: .dominant7) }.count == 12, "Seventh filter")
 check(chords.filter { $0.matches(query: "xyz", quality: nil) }.isEmpty, "Empty results")
+for (root, aliases) in Chord.rootAliases.enumerated() {
+    for alias in aliases {
+        for kind in ChordQuality.allCases {
+            let matches = chords.filter { $0.matches(query: alias + kind.suffix, quality: kind) }
+            check(matches.contains { $0.root == root }, "Enharmonic alias: \(alias)\(kind.suffix)")
+        }
+    }
+}
+check(chords.first { $0.symbol == "B♭m7" }!.matches(query: "A#m7", quality: .minor7), "Sharp alias of flat chord")
+check(chords.first { $0.id == "Cmaj7" }!.voicings[0].frets == [nil, 3, 2, 0, 0, 0], "Common open voicing is first")
+check(chords.first { $0.id == "Cm7b5" }!.matches(query: "Cø7", quality: nil), "Half diminished alias")
+check(chords.first { $0.id == "A7" }!.matches(query: "A seventh", quality: nil), "Seventh name alias")
+var corrupted = try JSONSerialization.jsonObject(with: Data(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1]))) as! [[String: Any]]
+corrupted[0]["root"] = 1
+let invalidData = try JSONSerialization.data(withJSONObject: corrupted)
+do {
+    _ = try ChordCatalog.decode(invalidData)
+    fatalError("Catalog must reject chord tones belonging to another root")
+} catch { /* Expected catalog validation failure. */ }
 let f = chords.first { $0.id == "F" }!
 check(f.voicings[0].note(at: 0, includeOctave: true) == "F2", "Bass pitch")
 check(f.voicings[1].note(at: 0) == nil, "Muted string")
 check(f.voicings[0].accessibilityDescription.contains("바레"), "Barre accessibility")
 for chord in chords {
     for voicing in chord.voicings {
-        check(voicing.pitches == Set(chord.quality.intervals.map { ($0 + chord.root) % 12 }), "Chord tones")
+        check(voicing.pitches.isSubset(of: Set(chord.quality.intervals.map { ($0 + chord.root) % 12 })), "No foreign chord tones: \(voicing.id)")
+        check(Set(chord.quality.requiredIntervals.map { ($0 + chord.root) % 12 }).isSubset(of: voicing.pitches), "Required chord tones: \(voicing.id)")
     }
 }
 print("Chord model checks passed.")
