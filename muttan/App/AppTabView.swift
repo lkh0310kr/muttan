@@ -4,7 +4,8 @@ struct AppTabView: View {
     private let launchArguments = ProcessInfo.processInfo.arguments
     @State private var selectedTab = ProcessInfo.processInfo.arguments
         .first(where: { $0.hasPrefix("--ui-snapshot=") })
-        .map { String($0.dropFirst("--ui-snapshot=".count)) } ?? "chords"
+        .map { String($0.dropFirst("--ui-snapshot=".count)) }
+        .map { $0 == "chord-detail" ? "chords" : $0 } ?? "chords"
 
     private var snapshotAppearance: ColorScheme? {
         guard let argument = launchArguments.first(where: { $0.hasPrefix("--ui-snapshot-appearance=") }) else { return nil }
@@ -13,7 +14,7 @@ struct AppTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            ChordLibraryView()
+            ChordLibraryView(snapshotDetail: launchArguments.contains("--ui-snapshot=chord-detail"))
                 .tabItem { Label("코드", systemImage: "guitars") }
                 .tag("chords")
 

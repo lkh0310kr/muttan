@@ -16,7 +16,7 @@ DERIVED_DATA_DIR="${DERIVED_DATA_DIR:-$ROOT_DIR/.derivedData/ui-screenshots}"
 DEVICE_NAME="${DEVICE_NAME:-}"
 DEVICE_ID="${DEVICE_ID:-}"
 CAPTURE_DELAY="${CAPTURE_DELAY:-2}"
-SCREENS_CSV="${SCREENS:-home,tuner,settings}"
+SCREENS_CSV="${SCREENS:-chords,chord-detail,tuner,settings}"
 APPEARANCES_CSV="${APPEARANCES:-light,dark}"
 STATUS_BAR_TIME="${STATUS_BAR_TIME:-9:41}"
 
@@ -28,7 +28,7 @@ Options:
   --output DIR        Store screenshots in DIR
   --device-name NAME   Select an installed Simulator by name
   --device-id UDID     Select an installed Simulator by UDID
-  --screens LIST       Comma-separated screen names (default: home,tuner,settings)
+  --screens LIST       Comma-separated screen names (default: chords,chord-detail,tuner,settings)
   --appearances LIST   Comma-separated themes (default: light,dark)
   --wait SECONDS       Delay after launch before capture (default: 2)
   --help               Show this help
