@@ -18,6 +18,8 @@
 		A10000000000000000000012 = {isa = PBXBuildFile; fileRef = B10000000000000000000012; };
 		A10000000000000000000013 = {isa = PBXBuildFile; fileRef = B10000000000000000000013; };
 		A10000000000000000000014 = {isa = PBXBuildFile; fileRef = B10000000000000000000014; };
+		A10000000000000000000015 /* PracticeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000015 /* PracticeFeature.swift */; };
+		A10000000000000000000016 /* practice-content.json in Resources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000016 /* practice-content.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		B10000000000000000000012 = {isa = PBXFileReference; lastKnownFileType = text.json; path = chords.json; sourceTree = "<group>"; };
 		B10000000000000000000013 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunerSignal.swift; sourceTree = "<group>"; };
 		B10000000000000000000014 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPalette.swift; sourceTree = "<group>"; };
+		B10000000000000000000015 /* PracticeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeFeature.swift; sourceTree = "<group>"; };
+		B10000000000000000000016 /* practice-content.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "practice-content.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 				B10000000000000000000004 /* TunerView.swift */,
 				B10000000000000000000010 /* PitchDetector.swift */,
 				B10000000000000000000013,
+				B10000000000000000000015 /* PracticeFeature.swift */,
+				B10000000000000000000016 /* practice-content.json */,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000012,
+				A10000000000000000000016 /* practice-content.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +215,7 @@
 				A10000000000000000000014,
 				A10000000000000000000008 /* PitchDetector.swift in Sources */,
 				A10000000000000000000013,
+				A10000000000000000000015 /* PracticeFeature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

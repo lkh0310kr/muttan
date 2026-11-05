@@ -8,6 +8,7 @@ struct TunerView: View {
     @State private var isVisible = false
     @State private var manualString: GuitarString?
     var screenshotMode = false
+    var isActive = true
     @StateObject private var tuner = GuitarTuner()
     @AppStorage("muttan.tuner.tuning") private var tuningRawValue = GuitarTuning.standard.rawValue
 
@@ -68,12 +69,16 @@ struct TunerView: View {
                 isVisible = true
                 manualString = nil
                 DebugLog.record("screen.tuner.appear")
-                if !screenshotMode { tuner.start() }
+                if !screenshotMode, isActive { tuner.start() }
             }
             .onDisappear { isVisible = false; tuner.stop() }
+            .onChange(of: isActive) { _, active in
+                guard !screenshotMode else { return }
+                if active { tuner.start() } else { tuner.stop() }
+            }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .background { tuner.stop() }
-                if phase == .active, isVisible, !screenshotMode { tuner.start() }
+                if phase == .active, isVisible, isActive, !screenshotMode { tuner.start() }
             }
             .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { notification in
                 if let type = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,

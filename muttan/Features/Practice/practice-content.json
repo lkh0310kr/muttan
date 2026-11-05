@@ -1,0 +1,505 @@
+{
+  "exercises": [
+    {
+      "id": "single-string-0123",
+      "title": "한 줄 0·1·2·3",
+      "subtitle": "한 박마다 프렛을 하나씩 옮겨요",
+      "tempo": 60,
+      "loop": true,
+      "notes": [
+        {
+          "id": "n1",
+          "bar": 1,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "n2",
+          "bar": 1,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "n3",
+          "bar": 1,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 66,
+          "string": 1,
+          "fret": 2,
+          "label": "F♯4"
+        },
+        {
+          "id": "n4",
+          "bar": 1,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        }
+      ]
+    }
+  ],
+  "songs": [
+    {
+      "id": "airplane",
+      "title": "비행기",
+      "subtitle": "C장조 · 4/4",
+      "key": "C",
+      "tempo": 72,
+      "loop": false,
+      "notes": [
+        {
+          "id": "b1-n1",
+          "bar": 1,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b1-n2",
+          "bar": 1,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b1-n3",
+          "bar": 1,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b1-n4",
+          "bar": 1,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b2-n1",
+          "bar": 2,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 69,
+          "string": 1,
+          "fret": 5,
+          "label": "A4"
+        },
+        {
+          "id": "b2-n2",
+          "bar": 2,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 69,
+          "string": 1,
+          "fret": 5,
+          "label": "A4"
+        },
+        {
+          "id": "b2-n3",
+          "bar": 2,
+          "beat": 2,
+          "durationBeats": 2,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b3-n1",
+          "bar": 3,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b3-n2",
+          "bar": 3,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b3-n3",
+          "bar": 3,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b3-n4",
+          "bar": 3,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b4-n1",
+          "bar": 4,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b4-n2",
+          "bar": 4,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b4-n3",
+          "bar": 4,
+          "beat": 2,
+          "durationBeats": 2,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b5-n1",
+          "bar": 5,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b5-n2",
+          "bar": 5,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b5-n3",
+          "bar": 5,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b5-n4",
+          "bar": 5,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b6-n1",
+          "bar": 6,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 69,
+          "string": 1,
+          "fret": 5,
+          "label": "A4"
+        },
+        {
+          "id": "b6-n2",
+          "bar": 6,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 69,
+          "string": 1,
+          "fret": 5,
+          "label": "A4"
+        },
+        {
+          "id": "b6-n3",
+          "bar": 6,
+          "beat": 2,
+          "durationBeats": 2,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b7-n1",
+          "bar": 7,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b7-n2",
+          "bar": 7,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b7-n3",
+          "bar": 7,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b7-n4",
+          "bar": 7,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b8-n1",
+          "bar": 8,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b8-n2",
+          "bar": 8,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b8-n3",
+          "bar": 8,
+          "beat": 2,
+          "durationBeats": 2,
+          "midi": 60,
+          "string": 2,
+          "fret": 1,
+          "label": "C4"
+        },
+        {
+          "id": "b9-n1",
+          "bar": 9,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b9-n2",
+          "bar": 9,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b9-n3",
+          "bar": 9,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b9-n4",
+          "bar": 9,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b10-n1",
+          "bar": 10,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b10-n2",
+          "bar": 10,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b10-n3",
+          "bar": 10,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b10-n4",
+          "bar": 10,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b11-n1",
+          "bar": 11,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b11-n2",
+          "bar": 11,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 67,
+          "string": 1,
+          "fret": 3,
+          "label": "G4"
+        },
+        {
+          "id": "b11-n3",
+          "bar": 11,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b11-n4",
+          "bar": 11,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 65,
+          "string": 1,
+          "fret": 1,
+          "label": "F4"
+        },
+        {
+          "id": "b12-n1",
+          "bar": 12,
+          "beat": 0,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b12-n2",
+          "bar": 12,
+          "beat": 1,
+          "durationBeats": 1,
+          "midi": 64,
+          "string": 1,
+          "fret": 0,
+          "label": "E4"
+        },
+        {
+          "id": "b12-n3",
+          "bar": 12,
+          "beat": 2,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        },
+        {
+          "id": "b12-n4",
+          "bar": 12,
+          "beat": 3,
+          "durationBeats": 1,
+          "midi": 62,
+          "string": 2,
+          "fret": 3,
+          "label": "D4"
+        }
+      ]
+    }
+  ]
+}
