@@ -1,6 +1,6 @@
 # muttan
 
-개인용 기타 튜닝 및 연습 도구 앱입니다. 제품 범위와 동작 요구사항은 [docs/PRD.md](docs/PRD.md)를 참고하세요. Xcode에서 `muttan.xcodeproj`를 열고 **muttan** scheme을 iOS 시뮬레이터나 기기에서 실행합니다.
+개인용 기타 튜닝 및 연습 도구 앱입니다. 제품 범위와 동작 요구사항은 [제품 명세](docs/PRD.md), UI 작업 기준과 조사 근거는 [디자인 가이드](docs/DESIGN_GUIDELINES.md)를 참고하세요. Xcode에서 `muttan.xcodeproj`를 열고 **muttan** scheme을 iOS 시뮬레이터나 기기에서 실행합니다.
 
 코드 사전은 기본 12개 코드와 24개 운지의 검색·필터·운지표를 제공합니다. 마이크 입력을 사용하는 실시간 기타 튜너도 제공합니다. 음정 추정에는 YIN 방식과 신뢰도 필터링, 시간적 완화를 사용합니다. 진단 이벤트는 Apple Unified Logging에 기록됩니다. 기기 로그를 보려면 Xcode에서 연결된 iPhone에 **muttan** scheme을 실행하고 Debug console을 확인합니다. 설정 화면은 현재 프로토타입입니다.
 
