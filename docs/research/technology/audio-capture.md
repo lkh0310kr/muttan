@@ -3,6 +3,7 @@
 ## 현재 앱 기준선
 
 - [`TunerView.swift`](../../../muttan/Features/Practice/TunerView.swift)가 `AVAudioEngine` 입력 노드에 tap을 설치하고, 4096프레임 버퍼를 요청한다.
+- 공용 `Play` 화면은 [`PracticeFeature.swift`](../../../muttan/Features/Practice/PracticeFeature.swift)에서 1024프레임 tap을 요청하고, 2048샘플 rolling window에서 YIN 추정 및 에너지/피치 변화 온셋 후보를 계산한다. 1024프레임은 44.1 kHz에서 약 23ms지만 실제 callback 크기·간격과 처리 지연은 실기기에서 확인하지 않았다.
 - 입력은 `.playAndRecord`와 `.measurement` 오디오 세션으로 구성된다.
 - 현재 세션은 `.allowBluetoothHFP`를 허용한다. Apple 문서에 따르면 HFP 입력/출력을 선택하면 양방향 라우트가 함께 전환되므로, 튜너/연습은 실제 route와 hardware format을 읽고 비교해야 한다.
 - 분석을 직렬 큐로 넘기며 오래된 분석 결과, 권한 상태, 화면 이탈 시 종료를 관리한다.
@@ -10,10 +11,10 @@
 - `TunerView`는 세션 route-change에서 `.oldDeviceUnavailable`만 pause 처리한다. `.newDeviceAvailable`/`routeConfigurationChange` 및 engine configuration notification을 받아 입력 포맷이 달라진 뒤 tap을 재설치하는 경로는 현재 확인되지 않는다.
 - `PitchDetector`는 전달받은 샘플의 실제 `sampleRate`로 주파수를 계산한다.
 - tap 콜백의 `AVAudioTime` 인자는 현재 무시한다. `capturedAt`은 콜백 진입 직후 uptime으로 기록되므로 샘플의 정확한 캡처 시각 대신 콜백 도착 근사치로 보아야 한다.
-- tap 요청은 4096프레임이지만 로그의 `bufferFrames`는 요청값을 기록한다. 실제 `buffer.frameLength`는 오디오 처리 중 읽으며, 현재 형식 로그와 구별해 기록해야 한다.
+- 튜너 tap 요청은 4096프레임이며 로그의 `bufferFrames`는 요청값을 기록한다. 실제 `buffer.frameLength`는 오디오 처리 중 읽으며, 요청값과 구별해 기록해야 한다. Play tap의 요청은 1024프레임이다.
 - tap callback은 채널 `UnsafeBufferPointer`를 `[Float]`에 복사한 뒤 직렬 큐로 보낸다. 결과 분석은 끝나도 `permit`은 main actor의 UI update가 실행될 때까지 점유한다. 다음 callback은 permit이 없으면 즉시 폐기하며 현재 drop 수는 기록하지 않는다.
 
-이 구성은 마이크 기반 튜너와 단음 연습의 적절한 MVP 출발점이다. 다만 요청 버퍼 크기는 실제 프레임 수나 응답 시간을 보장하지 않는다.
+이 구성은 마이크 기반 튜너와 단음 연습의 MVP 출발점이다. 튜너와 연습의 요청 크기는 다르며, 어느 쪽도 요청 버퍼 크기가 실제 프레임 수나 응답 시간을 보장하지 않는다.
 
 ## 근거로 확인한 사실
 
@@ -53,9 +54,9 @@
 
 | 시간 구간 | 현재 코드 | 조사 후보 |
 | --- | --- | --- |
-| tap 요청 | 4096 frames | 요청 크기별 실제 `frameLength` 확인 |
-| F0 입력 window | 전체 callback buffer, 최소 2048 samples | 2048/4096 samples와 개별 장단점 비교 |
-| hop/cadence | callback이 온 뒤 buffer 전체 1회 분석 | rolling window 512-sample hop 검토 |
+| tap 요청 | 튜너 4096, Play 1024 frames | 요청 크기별 실제 `frameLength` 확인 |
+| F0 입력 window | 튜너 전체 callback buffer, Play 2048-sample rolling window | 2048/4096 samples와 개별 장단점 비교 |
+| hop/cadence | Play는 1024-sample input hop, pitch는 보통 2048 input samples마다 분석 | rolling window 512-sample hop 검토 |
 | callback/drop | serial 분석 + main actor 반영까지 permit 점유, 바쁘면 buffer drop | callback 실행시간, permit wait/drop, 분석 종료와 UI 반영을 구분해 기록 |
 | latency | callback 진입 uptime 기준으로 reading age | AVAudioTime capture → 분석 → UI 반영 단계별 측정 |
 
@@ -63,7 +64,7 @@
 
 1. `TunerView`의 현재 입력 세션 흐름과 로그 필드를 파악한다. 확인된 route/engine configuration gap의 빈도·영향을 실기기에서 조사한다.
 2. 실기기 한 대에서 기본 라우트 기준을 측정하고 결과를 남긴다.
-3. `비행기` 단음 반응에 문제가 확인될 경우에만 선호 I/O buffer 요청을 시도한다.
+3. 0–1–2–3 훈련과 `비행기`에서 단음·반복 타격 반응 문제가 확인될 경우에만 선호 I/O buffer 요청을 시도한다.
 4. 변경 전후에 누락, CPU/발열, 입력 지연, 세션 복구를 함께 비교한다.
 
 ## 참고
